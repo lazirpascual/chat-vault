@@ -1,37 +1,44 @@
 import React from "react";
 import { MoreVert } from "@material-ui/icons";
+import { Users } from "../../dummyData";
 import "./post.css";
 
-const Post = () => {
+const Post = ({ post }) => {
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
             <img
-              src="/assets/person/1.jpeg"
-              alt=""
+              src={Users.filter((u) => u.id === post.userId)[0].profilePicture}
+              alt="Profile"
               className="postProfileImg"
             />
-            <span className="postUsername">Lazir Pascual</span>
-            <span className="postDate">5 mins ago</span>
+            <span className="postUsername">
+              {Users.filter((u) => u.id === post.userId)[0].username}
+            </span>
+            <span className="postDate">{post.date}</span>
           </div>
           <div className="postTopRight">
             <MoreVert />
           </div>
         </div>
         <div className="postCenter">
-          <span className="postText">Hey! it's my first post</span>
-          <img src="assets/post/1.jpeg" alt="" className="postImg" />
+          <span className="postText">{post?.desc}</span>
+          <img src={post.photo} alt="Post" className="postImg" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             <img className="likeIcon" src="assets/like.png" alt="" />
             <img className="likeIcon" src="assets/heart.png" alt="" />
-            <span className="postLikeCounter">32 People liked this post</span>
+            <span className="postLikeCounter">
+              {post.like} People liked this post
+            </span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">9 comments</span>
+            <span className="postCommentText">
+              {post.comment} {post.comment > 1 ? `comments` : `comment`}
+            </span>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Users } from "../../dummyData";
 import "./sidebar.css";
 import {
   RssFeed,
@@ -11,6 +12,7 @@ import {
   Event,
   School,
 } from "@material-ui/icons";
+import Friends from "../friends/Friends";
 
 const sidebarItems = [
   { icon: <RssFeed className="sidebarIcon" />, name: "Feed" },
@@ -42,14 +44,9 @@ const Sidebar = () => {
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/2.jpeg"
-              alt=""
-              className="sidebarFriendImg"
-            />
-            <span className="sidebarFriendName">Jane Doe</span>
-          </li>
+          {Users.map((u) => (
+            <Friends key={u.id} user={u} />
+          ))}
         </ul>
       </div>
     </div>
