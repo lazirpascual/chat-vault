@@ -15,7 +15,9 @@ const Rightbar = ({ profile }) => {
             <b>Pola Foster</b> and <b>3 others</b> have a birthday today.
           </span>
         </div>
-        <img src="assets/ad.png" alt="" className="rightbarAd" />
+        <a href="https://cloudcomputers.netlify.app">
+          <img src="assets/ad.jpg" alt="" className="rightbarAd" />
+        </a>
         <h3 className="rightbarTitle">Online Friends</h3>
         <ul className="rightbarFriendList">
           {Users.map((u) => (
