@@ -4,8 +4,6 @@ import Online from "../online/Online";
 import "./rightbar.css";
 
 const Rightbar = ({ profile }) => {
-  // if profile prop exists, render profile. Else, render homepage
-
   const HomeRightbar = () => {
     return (
       <>
@@ -104,6 +102,7 @@ const Rightbar = ({ profile }) => {
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
+        {/* if profile prop exists, render profile rightbar. Otherwise, render home rightbar */}
         {profile ? ProfileRightbar() : HomeRightbar()}
       </div>
     </div>
