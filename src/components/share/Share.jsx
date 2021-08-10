@@ -34,7 +34,7 @@ const Share = () => {
         <div className="shareBottom">
           <div className="shareOptions">
             {shareItems.map((item) => (
-              <div className="shareOption">
+              <div key={item.name} className="shareOption">
                 {item.icon}
                 <span className="shareOptionText">{item.name}</span>
               </div>

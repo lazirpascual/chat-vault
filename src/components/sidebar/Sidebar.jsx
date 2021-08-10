@@ -35,7 +35,7 @@ const Sidebar = () => {
       <div className="sidebarWrapper">
         <ul className="sidebarList">
           {sidebarItems.map((item) => (
-            <li className="sidebarListItem">
+            <li key={item.name} className="sidebarListItem">
               {item.icon}
               <span>{item.name}</span>
             </li>
