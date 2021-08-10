@@ -10,3 +10,8 @@ export const loginCall = async (userCredential, dispatch) => {
     dispatch(LoginFailure(error));
   }
 };
+
+export const registerCall = async (user) => {
+  const response = await axios.post("/auth/register", user);
+  return response.data;
+};

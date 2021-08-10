@@ -1,7 +1,44 @@
-import React from "react";
+import React, { useRef, useContext } from "react";
+import { loginCall, registerCall } from "../../services/auth";
+import { AuthContext } from "../../context/AuthContext";
+import { useHistory } from "react-router";
 import "./register.css";
 
 const Register = () => {
+  const { dispatch } = useContext(AuthContext);
+  const username = useRef();
+  const email = useRef();
+  const password = useRef();
+  const passwordAgain = useRef();
+  const history = useHistory();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (passwordAgain.current.value !== password.current.value) {
+      password.current.setCustomValidity(
+        "The password you entered does not match."
+      );
+    } else {
+      const user = {
+        username: username.current.value,
+        email: email.current.value,
+        password: password.current.value,
+      };
+      try {
+        const registerResponse = await registerCall(user);
+        const loginResponse = loginCall(
+          { email: email.current.value, password: password.current.value },
+          dispatch
+        );
+        if (registerResponse && loginResponse) {
+          history.push("/");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -12,13 +49,39 @@ const Register = () => {
           </span>
         </div>
         <div className="loginRight">
-          <div className="loginBox">
-            <input placeholder="Username" className="loginInput" />
-            <input placeholder="Email" className="loginInput" />
-            <input placeholder="Password" className="loginInput" />
-            <input placeholder="Enter Password Again" className="loginInput" />
-            <button className="loginButton">Sign Up</button>
-          </div>
+          <form className="loginBox" onSubmit={handleSubmit}>
+            <input
+              required
+              placeholder="Username"
+              ref={username}
+              className="loginInput"
+            />
+            <input
+              required
+              placeholder="Email"
+              ref={email}
+              className="loginInput"
+              type="email"
+            />
+            <input
+              required
+              placeholder="Password"
+              ref={password}
+              className="loginInput"
+              type="password"
+              minLength="6"
+            />
+            <input
+              required
+              placeholder="Enter Password Again"
+              ref={passwordAgain}
+              className="loginInput"
+              type="password"
+            />
+            <button type="submit" className="loginButton">
+              Sign Up
+            </button>
+          </form>
         </div>
       </div>
     </div>
