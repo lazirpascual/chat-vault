@@ -4,7 +4,7 @@ This is a fullstack MERN application that models a social media website. Include
 
 ## 🔗 Live Demo of [Chat Vault](https://chatvault.netlify.app/)
 
-## ⫸ [Backend Repo](https://github.com/lazirpascual/chat-vault-backend)
+## ⫸ Backend [Repo](https://github.com/lazirpascual/chat-vault-backend)
 
 ## 🛠 Tech Stack
 
@@ -24,27 +24,27 @@ This is a fullstack MERN application that models a social media website. Include
 - Follow or unfollow a user
 - Keep track of a user's information (friends, posts, hometown, etc.) by navigating to their profile page
 
-## Development Process
+# Development Process
 
 - **Adding a Backend** <br />
   I started this project off by building the backend portion of my application. As I was still trying to gain proficiency with the MERN stack, I used Node.JS and Express to build my backend and MongoDB for my database. First, I created a USERS model & route that serves a REST API to be used for updating, deleting, following, and unfollowing a user. Afterwards, I created an AUTH model & route that is used for authenticating (login) and creating (register) a user account. Finally, I added a POSTS model & route that is used to create, update, delete and retreive a post from the home page or a user's profile page.
 - **Adding a Front-End** <br />
   After initially building my application with a backend, I decided to build a frontend. For this, I used React JS and plain CSS to style and design my application while minimally using Material-UI to import some icons. I created the components and pages that would implement the features that I created for the backend such as the homepage, profile page, register page, and login page.
 
-## Screenshots
+# Screenshots
 
-### Home Page
+## 1. Home Page
 
 ![preview](https://i.imgur.com/mmY5ii9.jpg)
 
-### Profile Page
+## 2. Profile Page
 
 ![preview](https://i.imgur.com/d14rGob.jpg)
 
-### Login Page
+## 3. Login Page
 
 ![preview](https://i.imgur.com/OnKz4D9.jpg)
 
-### Register Page
+## 4. Register Page
 
 ![preview](https://i.imgur.com/0dPLz5B.jpg)
