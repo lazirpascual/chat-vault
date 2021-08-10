@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { MoreVert } from "@material-ui/icons";
 import "./post.css";
+import { AuthContext } from "../../context/AuthContext";
 
 const Post = ({ post }) => {
-  const [like, setLike] = useState(post.like ? post.like.length : 0);
+  const [like, setLike] = useState(post.likes ? post.likes.length : 0);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+  const { user: currentUser } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  useEffect(() => {
+    // if the post.likes array already includes current id, the post is already liked
+    setIsLiked(post.likes.includes(currentUser._id));
+  }, [currentUser._id, post.likes]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -17,9 +24,14 @@ const Post = ({ post }) => {
       setUser(res.data);
     };
     fetchUser();
-  }, [post.userId]); // we include it as a dependency because it is changeable
+  }, [post.userId]);
 
-  const likeHandler = () => {
+  const likeHandler = async () => {
+    try {
+      await axios.put(`/posts/${post._id}/like`, { userId: currentUser._id });
+    } catch (error) {
+      console.log(error);
+    }
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
@@ -31,7 +43,11 @@ const Post = ({ post }) => {
           <div className="postTopLeft">
             <Link to={`profile/${user.username}`}>
               <img
-                src={user.profilePicture || PF + "person/noAvatar.png"} // use custom avatar if profile pic does not exist
+                src={
+                  user.profilePicture
+                    ? PF + user.profilePicture
+                    : PF + "person/noAvatar.png"
+                }
                 alt="Profile"
                 className="postProfileImg"
               />
