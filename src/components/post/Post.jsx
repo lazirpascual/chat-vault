@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { MoreVert } from "@material-ui/icons";
-import { Users } from "../../dummyData";
 import axios from "axios";
 import "./post.css";
 
 const Post = ({ post }) => {
-  const [like, setLike] = useState(post.like);
+  const [like, setLike] = useState(post.like ? post.like.length : 0);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -30,7 +29,7 @@ const Post = ({ post }) => {
         <div className="postTop">
           <div className="postTopLeft">
             <img
-              src={user.profilePicture}
+              src={user.profilePicture || PF + "person/noAvatar.png"} // use custom avatar if profile pic does not exist
               alt="Profile"
               className="postProfileImg"
             />
@@ -43,7 +42,7 @@ const Post = ({ post }) => {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img src={PF + post.photo} alt="Post" className="postImg" />
+          <img src={PF + post.img} alt="Post" className="postImg" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
