@@ -21,6 +21,10 @@
   cursor: pointer;
 }
 
+.logo:hover {
+  color: rgb(27, 26, 26);
+}
+
 .topbarCenter {
   flex: 5;
 }
@@ -57,9 +61,13 @@
 }
 
 .topbarLink {
-  margin-right: 10px;
+  margin-right: 20px;
   font-style: 14px;
   cursor: pointer;
+}
+
+.topbarLink:hover {
+  color: black;
 }
 
 .topbarIcons {
@@ -70,6 +78,10 @@
   margin-right: 15px;
   cursor: pointer;
   position: relative;
+}
+
+.topbarIconItem:hover {
+  color: rgb(27, 26, 26);
 }
 
 .topbarIconBadge {

@@ -32,7 +32,9 @@ const Topbar = () => {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <span className="topbarLink">Home</span>
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <span className="topbarLink">Home</span>
+          </Link>
           <span className="topbarLink" onClick={handleLogout}>
             Log Out
           </span>
@@ -42,10 +44,15 @@ const Topbar = () => {
             <Person />
             <span className="topbarIconBadge">1</span>
           </div>
-          <div className="topbarIconItem">
-            <Chat />
-            <span className="topbarIconBadge">2</span>
-          </div>
+          <Link
+            to="/messenger"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <div className="topbarIconItem">
+              <Chat />
+              <span className="topbarIconBadge">2</span>
+            </div>
+          </Link>
           <div className="topbarIconItem">
             <Notifications />
             <span className="topbarIconBadge">1</span>

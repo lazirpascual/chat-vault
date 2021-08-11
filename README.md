@@ -2,7 +2,7 @@
 
 This is a fullstack MERN application that models a social media website. Includes a Realtime Chat Feature built using Socket.io library. Made using Javascript, React JS, Node JS, Express, MongoDB, and Material-UI. <br />
 
-## 🔗 Live Demo of [Chat Vault](https://chatvault.netlify.app/)
+## 🔗 Live Demo of [Chat Vault](https://chatvault.herokuapp.com/)
 
 ## ⫸ Backend [Repo](https://github.com/lazirpascual/chat-vault-backend)
 
