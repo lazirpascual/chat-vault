@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext, useRef, useState } from "react";
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
+import { AuthContext } from "../../context/AuthContext";
 import "./share.css";
+import axios from "axios";
 
 const shareItems = [
   {
-    icon: <PermMedia htmlColor="tomato" className="shareIcon" />,
-    name: "Photo or Video",
+    icon: <Label htmlColor="blue" className="shareIcon" />,
+    name: "Tag",
   },
-  { icon: <Label htmlColor="blue" className="shareIcon" />, name: "Tag" },
   {
     icon: <Room htmlColor="green" className="shareIcon" />,
     name: "Location",
@@ -19,20 +20,58 @@ const shareItems = [
 ];
 
 const Share = () => {
+  const { user } = useContext(AuthContext);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const desc = useRef();
+  const [file, setFile] = useState(null);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const newPost = {
+      userId: user._id,
+      desc: desc.current.value,
+    };
+
+    try {
+      await axios.post("/posts", newPost);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
           <img
-            src="/assets/person/1.jpeg"
+            src={
+              user.profilePicture
+                ? `${PF}${user.profilePicture}`
+                : `${PF}person/noAvatar.png`
+            }
             alt="Profile"
             className="shareProfileImg"
           />
-          <input placeholder="What's on your mind?" className="shareInput" />
+          <input
+            placeholder={`What's on your mind, ${user.username}?`}
+            className="shareInput"
+            ref={desc}
+          />
         </div>
         <hr className="shareHr" />
-        <div className="shareBottom">
+        <form className="shareBottom" onSubmit={handleSubmit}>
           <div className="shareOptions">
+            <label htmlFor="file" className="shareOption">
+              <PermMedia htmlColor="tomato" className="shareIcon" />
+              <span className="shareOptionText">Photo or Video</span>
+              <input
+                style={{ display: "none" }}
+                type="file"
+                id="file"
+                accept=".png, .jpg, .jpeg"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </label>
             {shareItems.map((item) => (
               <div key={item.name} className="shareOption">
                 {item.icon}
@@ -40,8 +79,10 @@ const Share = () => {
               </div>
             ))}
           </div>
-          <button className="shareButton">Share</button>
-        </div>
+          <button type="submit" className="shareButton">
+            Share
+          </button>
+        </form>
       </div>
     </div>
   );
