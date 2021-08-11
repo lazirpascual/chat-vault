@@ -15,6 +15,7 @@ const Feed = ({ username }) => {
         ? await axios.get(`/posts/profile/${username}`)
         : await axios.get(`posts/timeline/${user._id}`);
       setPosts(
+        // sorts posts by most recent
         res.data.sort((p1, p2) => {
           return new Date(p2.createdAt) - new Date(p1.createdAt);
         })
@@ -26,7 +27,7 @@ const Feed = ({ username }) => {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
+        {username === user.username && <Share />}
         {posts.map((p) => (
           <Post key={p._id} post={p} />
         ))}
