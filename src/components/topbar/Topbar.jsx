@@ -3,10 +3,16 @@ import "./topbar.css";
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { LogoutCall } from "../../context/AuthActions";
 
 const Topbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const handleLogout = (params) => {
+    window.localStorage.removeItem("user");
+    dispatch(LogoutCall());
+  };
 
   return (
     <div className="topbarContainer">
@@ -27,7 +33,9 @@ const Topbar = () => {
       <div className="topbarRight">
         <div className="topbarLinks">
           <span className="topbarLink">Home</span>
-          <span className="topbarLink">Timeline</span>
+          <span className="topbarLink" onClick={handleLogout}>
+            Log Out
+          </span>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
