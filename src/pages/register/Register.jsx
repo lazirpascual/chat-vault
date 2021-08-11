@@ -52,7 +52,7 @@ const Register = () => {
           <form className="loginBox" onSubmit={handleSubmit}>
             <input
               required
-              placeholder="Username"
+              placeholder="Full Name"
               ref={username}
               className="loginInput"
             />
@@ -78,6 +78,12 @@ const Register = () => {
               className="loginInput"
               type="password"
             />
+            <span
+              className="loginForgot"
+              onClick={() => history.push(`/login`)}
+            >
+              Already have an account? Log in
+            </span>
             <button type="submit" className="loginButton">
               Sign Up
             </button>
