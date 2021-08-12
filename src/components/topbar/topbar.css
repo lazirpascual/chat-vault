@@ -21,10 +21,6 @@
   cursor: pointer;
 }
 
-.logo:hover {
-  color: rgb(27, 26, 26);
-}
-
 .topbarCenter {
   flex: 5;
 }

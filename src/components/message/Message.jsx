@@ -1,20 +1,17 @@
 import React from "react";
+import { format } from "timeago.js";
 import "./message.css";
 
-const Message = ({ own }) => {
+const Message = ({ own, message }) => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
     <div className={own ? "message own" : "message"}>
       <div className="messageTop">
         <img className="messageImg" src={PF + "person/1.jpeg"} alt="" />
-        <p className="messageText">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ad
-          consequatur vero minus? Voluptatum quae non officiis! In iure dolore
-          vitae sit numquam corporis. Rerum id quo iure accusantium voluptates.
-        </p>
+        <p className="messageText">{message.text}</p>
       </div>
-      <div className="messsageBottom">1 hour ago</div>
+      <div className="messageBottom">{format(message.createdAt)}</div>
     </div>
   );
 };
