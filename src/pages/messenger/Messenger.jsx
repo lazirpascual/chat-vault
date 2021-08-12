@@ -5,6 +5,7 @@ import Message from "../../components/message/Message";
 import Topbar from "../../components/topbar/Topbar";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import { io } from "socket.io-client";
 import "./messenger.css";
 
 const Messenger = () => {
@@ -13,7 +14,19 @@ const Messenger = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState(null);
+  const socket = useRef();
   const scrollRef = useRef();
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+  }, []);
+
+  useEffect(() => {
+    socket.current.emit("addUser", user._id); // send user id to socket server
+    socket.current.on("getUsers", (users) => {
+      console.log(users);
+    });
+  }, [user]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -79,7 +92,7 @@ const Messenger = () => {
               <>
                 <div className="chatBoxTop">
                   {messages.map((m) => (
-                    <div ref={scrollRef}>
+                    <div key={m._id} ref={scrollRef}>
                       <Message message={m} own={m.sender === user._id} />
                     </div>
                   ))}
