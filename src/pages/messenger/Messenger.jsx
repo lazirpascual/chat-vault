@@ -42,7 +42,9 @@ const Messenger = () => {
   useEffect(() => {
     socket.current.emit("addUser", user._id); // send user id to socket server
     socket.current.on("getUsers", (users) => {
-      // retreive all users from socket server
+      // retreive user's friends
+      // for each friend, check if their user id matches the id of user who connected to the socket
+      // if it does, set to onlineUsers state
       setOnlineUsers(
         user?.followings.filter((f) => users.some((u) => u.userId === f))
       );
