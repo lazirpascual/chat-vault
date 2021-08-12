@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import ChatOnline from "../../components/chatOnline/ChatOnline";
 import Conversation from "../../components/conversations/Conversation";
 import Message from "../../components/message/Message";
@@ -6,7 +6,6 @@ import Topbar from "../../components/topbar/Topbar";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import "./messenger.css";
-import { NewReleases } from "@material-ui/icons";
 
 const Messenger = () => {
   const { user } = useContext(AuthContext);
@@ -14,6 +13,7 @@ const Messenger = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState(null);
+  const scrollRef = useRef();
 
   useEffect(() => {
     const getConversations = async () => {
@@ -55,6 +55,10 @@ const Messenger = () => {
     }
   };
 
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behaviour: "smooth" });
+  }, [messages]);
+
   return (
     <>
       <Topbar />
@@ -75,7 +79,9 @@ const Messenger = () => {
               <>
                 <div className="chatBoxTop">
                   {messages.map((m) => (
-                    <Message message={m} own={m.sender === user._id} />
+                    <div ref={scrollRef}>
+                      <Message message={m} own={m.sender === user._id} />
+                    </div>
                   ))}
                 </div>
                 <form className="chatBoxBottom" onSubmit={handleSubmit}>
