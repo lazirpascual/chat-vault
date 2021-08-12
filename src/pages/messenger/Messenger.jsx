@@ -20,7 +20,7 @@ const Messenger = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("ws://localhost:3001");
     // fetch message from socket server
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({

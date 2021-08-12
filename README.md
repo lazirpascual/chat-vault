@@ -1,6 +1,6 @@
 # Chat Vault
 
-## Backend [Repo](https://github.com/lazirpascual/chat-vault-backend) | Socket.IO [Repo](https://github.com/lazirpascual/chat-vault-socket.io)
+## Backend [Repo](https://github.com/lazirpascual/chat-vault-backend)
 
 This is a fullstack MERN application that models a social media website. Includes a Realtime Chat Feature built using Socket.IO library. Made using Javascript, React JS, Node JS, Express, Socket.IO, MongoDB, and Material-UI. <br />
 
