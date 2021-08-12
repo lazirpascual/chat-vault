@@ -15,6 +15,7 @@ const Messenger = () => {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [messages, setMessages] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
   const scrollRef = useRef();
 
@@ -31,7 +32,7 @@ const Messenger = () => {
   }, []);
 
   useEffect(() => {
-    // if socket message exists and if current chat includes sender, update message
+    // if socket message exists and if current chat is from sender, update message
     arrivalMessage &&
       currentChat?.members.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
@@ -42,7 +43,9 @@ const Messenger = () => {
     socket.current.emit("addUser", user._id); // send user id to socket server
     socket.current.on("getUsers", (users) => {
       // retreive all users from socket server
-      console.log(users);
+      setOnlineUsers(
+        user?.followings.filter((f) => users.some((u) => u.userId === f))
+      );
     });
   }, [user]);
 
@@ -147,10 +150,11 @@ const Messenger = () => {
         </div>
         <div className="chatOnline">
           <div className="chatOnlineWrapper">
-            <ChatOnline />
-            <ChatOnline />
-            <ChatOnline />
-            <ChatOnline />
+            <ChatOnline
+              onlineUsers={onlineUsers}
+              currentId={user._id}
+              setCurrentChat={setCurrentChat}
+            />
           </div>
         </div>
       </div>

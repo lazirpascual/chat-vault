@@ -1,3 +1,10 @@
+.rightbarTitle {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
 .chatOnlineFriend {
   display: flex;
   align-items: center;

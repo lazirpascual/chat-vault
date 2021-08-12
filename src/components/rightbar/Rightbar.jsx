@@ -59,7 +59,7 @@ const Rightbar = ({ user }) => {
           </span>
         </div>
         <a href="https://cloudcomputers.netlify.app">
-          <img src={`${PF}ad.jpg`} alt="" className="rightbarAd" />
+          <img src={`${PF}cloudcomputers.jpg`} alt="" className="rightbarAd" />
         </a>
         <h3 className="rightbarTitle">Online Friends</h3>
         <ul className="rightbarFriendList">
