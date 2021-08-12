@@ -6,11 +6,13 @@ import Topbar from "../../components/topbar/Topbar";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import "./messenger.css";
+import { NewReleases } from "@material-ui/icons";
 
 const Messenger = () => {
   const { user } = useContext(AuthContext);
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
+  const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState(null);
 
   useEffect(() => {
@@ -37,6 +39,22 @@ const Messenger = () => {
     getMessages();
   }, [currentChat]);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const message = {
+      sender: user._id,
+      text: newMessage,
+      conversationId: currentChat._id,
+    };
+    try {
+      const res = await axios.post("/messages", message);
+      setMessages([...messages, res.data]);
+      setNewMessage("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Topbar />
@@ -60,13 +78,17 @@ const Messenger = () => {
                     <Message message={m} own={m.sender === user._id} />
                   ))}
                 </div>
-                <div className="chatBoxBottom">
-                  <textarea
+                <form className="chatBoxBottom" onSubmit={handleSubmit}>
+                  <input
+                    value={newMessage}
                     className="chatMessageInput"
                     placeholder="Type your message here..."
-                  ></textarea>
-                  <button className="chatSubmitButton">Send</button>
-                </div>{" "}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                  ></input>
+                  <button type="submit" className="chatSubmitButton">
+                    Send
+                  </button>
+                </form>
               </>
             ) : (
               <span className="noConversationText">

@@ -43,9 +43,18 @@
 }
 
 .chatMessageInput {
+  font-size: 18px;
   width: 80%;
-  height: 90px;
-  padding: 10px;
+  height: 50px;
+  padding: 10px 30px;
+  border-radius: 40px;
+  border-style: groove;
+  border-color: rgb(236, 240, 240);
+  background-color: rgb(244, 246, 246);
+}
+
+.chatMessageInput:focus {
+  outline: none;
 }
 
 .chatSubmitButton {
