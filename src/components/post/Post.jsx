@@ -20,7 +20,9 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?userId=${post.userId}`);
+      const res = await axios.get(
+        `https://chatvault.herokuapp.com/api/users?userId=${post.userId}`
+      );
       setUser(res.data);
     };
     fetchUser();
@@ -28,7 +30,10 @@ const Post = ({ post }) => {
 
   const likeHandler = async () => {
     try {
-      await axios.put(`/posts/${post._id}/like`, { userId: currentUser._id });
+      await axios.put(
+        `https://chatvault.herokuapp.com/api/posts/${post._id}/like`,
+        { userId: currentUser._id }
+      );
     } catch (error) {
       console.log(error);
     }

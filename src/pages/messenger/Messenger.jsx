@@ -20,7 +20,7 @@ const Messenger = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:3001");
+    socket.current = io("https://chatvault.herokuapp.com");
     // fetch message from socket server
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
@@ -54,7 +54,9 @@ const Messenger = () => {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get(`/conversations/${user._id}`);
+        const res = await axios.get(
+          `https://chatvault.herokuapp.com/api/conversations/${user._id}`
+        );
         setConversations(res.data);
       } catch (error) {
         console.log(error);
@@ -66,7 +68,9 @@ const Messenger = () => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get(`/messages/${currentChat?._id}`);
+        const res = await axios.get(
+          `https://chatvault.herokuapp.com/api/messages/${currentChat?._id}`
+        );
         setMessages(res.data);
       } catch (error) {
         console.log(error);
@@ -98,7 +102,10 @@ const Messenger = () => {
     });
 
     try {
-      const res = await axios.post("/messages", message);
+      const res = await axios.post(
+        "https://chatvault.herokuapp.com/api/messages",
+        message
+      );
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (error) {

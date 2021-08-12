@@ -11,7 +11,9 @@ const Conversation = ({ conversation, currentUser }) => {
 
     const getUser = async () => {
       try {
-        const res = await axios(`/users/?userId=${friendId}`);
+        const res = await axios(
+          `https://chatvault.herokuapp.com/api/users/?userId=${friendId}`
+        );
         setUser(res.data);
       } catch (error) {
         console.log(error);

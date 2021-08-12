@@ -39,13 +39,13 @@ const Share = () => {
       data.append("file", file);
       newPost.img = fileName;
       try {
-        await axios.post("/upload", data);
+        await axios.post("https://chatvault.herokuapp.com/api/upload", data);
       } catch (error) {
         console.log(error);
       }
     }
     try {
-      await axios.post("/posts", newPost);
+      await axios.post("https://chatvault.herokuapp.com/api/posts", newPost);
       window.location.reload(); // reload page to update post state
     } catch (error) {
       console.log(error);

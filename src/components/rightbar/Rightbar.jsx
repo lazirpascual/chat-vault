@@ -21,7 +21,9 @@ const Rightbar = ({ user }) => {
   useEffect(() => {
     const getFriends = async (params) => {
       try {
-        const friendList = await axios.get(`/users/friends/${user._id}`);
+        const friendList = await axios.get(
+          `https://chatvault.herokuapp.com/api/users/friends/${user._id}`
+        );
         setFriends(friendList.data);
       } catch (error) {
         console.log(error);

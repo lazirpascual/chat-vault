@@ -10,7 +10,9 @@ const Message = ({ own, message }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await axios(`/users/?userId=${message.sender}`);
+        const res = await axios(
+          `https://chatvault.herokuapp.com/api/users/?userId=${message.sender}`
+        );
         setUser(res.data);
       } catch (error) {
         console.log(error);

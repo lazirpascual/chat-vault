@@ -11,7 +11,9 @@ const ChatOnline = ({ onlineUsers, currentId, setCurrentChat }) => {
     // fetch user's friends (following)
     const getFriends = async () => {
       try {
-        const res = await axios.get(`/users/friends/${currentId}`);
+        const res = await axios.get(
+          `https://chatvault.herokuapp.com/api/users/friends/${currentId}`
+        );
         setFriends(res.data);
       } catch (error) {
         console.log(error);
@@ -30,7 +32,7 @@ const ChatOnline = ({ onlineUsers, currentId, setCurrentChat }) => {
   const handleClick = async (user) => {
     try {
       const res = await axios.get(
-        `/conversations/find/${currentId}/${user._id}`
+        `https://chatvault.herokuapp.com/api/conversations/find/${currentId}/${user._id}`
       );
       setCurrentChat(res.data);
     } catch (err) {
