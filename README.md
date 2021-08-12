@@ -4,7 +4,7 @@ This is a fullstack MERN application that models a social media website. Include
 
 ## 🔗 Live Demo of [Chat Vault](https://chatvault.herokuapp.com/)
 
-## ⫸ Backend [Repo](https://github.com/lazirpascual/chat-vault-backend)
+## ⫸ Backend [Repo](https://github.com/lazirpascual/chat-vault-backend) | Socket.IO [Repo](https://github.com/lazirpascual/chat-vault-socket.io)
 
 ## 🛠 Tech Stack
 
