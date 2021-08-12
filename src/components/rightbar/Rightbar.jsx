@@ -15,7 +15,7 @@ const Rightbar = ({ user }) => {
   const [followed, setFollowed] = useState(false);
 
   useEffect(() => {
-    setFollowed(currentUser.followings.includes(`${user?._id}`));
+    setFollowed(currentUser?.followings.includes(`${user?._id}`));
   }, [user, currentUser]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Rightbar = ({ user }) => {
       }
     };
     getFriends();
-  }, [user, followed, currentUser.followings]);
+  }, [user, followed, currentUser?.followings]);
 
   const handleClick = async () => {
     try {
@@ -74,7 +74,7 @@ const Rightbar = ({ user }) => {
   const ProfileRightbar = () => {
     return (
       <>
-        {user.username !== currentUser.username && (
+        {user.username !== currentUser?.username && (
           <button className="rightbarFollowButton" onClick={handleClick}>
             {followed ? `Unfollow` : `Follow`}
             {followed ? <Remove /> : <Add />}

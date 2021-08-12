@@ -15,8 +15,8 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     // if the post.likes array already includes current id, the post is already liked
-    setIsLiked(post.likes.includes(currentUser._id));
-  }, [currentUser._id, post.likes]);
+    setIsLiked(post.likes.includes(currentUser?._id));
+  }, [currentUser?._id, post.likes]);
 
   useEffect(() => {
     const fetchUser = async () => {
