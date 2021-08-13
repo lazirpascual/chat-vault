@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import Share from "../share/Share";
 import Post from "../post/Post";
-import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import { getProfilePosts, getTimelinePosts } from "../../services/posts";
 import "./feed.css";
 
 const Feed = ({ username }) => {
@@ -11,16 +11,12 @@ const Feed = ({ username }) => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = username
-        ? await axios.get(
-            `https://chatvault.herokuapp.com/api/posts/profile/${username}`
-          )
-        : await axios.get(
-            `https://chatvault.herokuapp.com/api/posts/timeline/${user._id}`
-          );
+      const initialPosts = username
+        ? await getProfilePosts(username)
+        : await getTimelinePosts(user._id);
       setPosts(
         // sorts posts by most recent
-        res.data.sort((p1, p2) => {
+        initialPosts.sort((p1, p2) => {
           return new Date(p2.createdAt) - new Date(p1.createdAt);
         })
       );

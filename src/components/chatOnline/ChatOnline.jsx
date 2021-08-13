@@ -1,5 +1,6 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { getUserFriends } from "../../services/users";
+import { getConversation } from "../../services/conversations";
 import "./chatOnline.css";
 
 const ChatOnline = ({ onlineUsers, currentId, setCurrentChat }) => {
@@ -11,10 +12,8 @@ const ChatOnline = ({ onlineUsers, currentId, setCurrentChat }) => {
     // fetch user's friends (following)
     const getFriends = async () => {
       try {
-        const res = await axios.get(
-          `https://chatvault.herokuapp.com/api/users/friends/${currentId}`
-        );
-        setFriends(res.data);
+        const friends = await getUserFriends(currentId);
+        setFriends(friends);
       } catch (error) {
         console.log(error);
       }
@@ -31,10 +30,8 @@ const ChatOnline = ({ onlineUsers, currentId, setCurrentChat }) => {
 
   const handleClick = async (user) => {
     try {
-      const res = await axios.get(
-        `https://chatvault.herokuapp.com/api/conversations/find/${currentId}/${user._id}`
-      );
-      setCurrentChat(res.data);
+      const conversation = await getConversation(currentId, user._id);
+      setCurrentChat(conversation);
     } catch (err) {
       console.log(err);
     }

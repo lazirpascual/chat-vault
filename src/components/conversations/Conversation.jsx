@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { getUserById } from "../../services/users";
 import "./conversation.css";
 
 const Conversation = ({ conversation, currentUser }) => {
@@ -11,10 +11,8 @@ const Conversation = ({ conversation, currentUser }) => {
 
     const getUser = async () => {
       try {
-        const res = await axios(
-          `https://chatvault.herokuapp.com/api/users/?userId=${friendId}`
-        );
-        setUser(res.data);
+        const friend = await getUserById(friendId);
+        setUser(friend);
       } catch (error) {
         console.log(error);
       }

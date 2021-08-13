@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { format } from "timeago.js";
-import axios from "axios";
+import { getUserById } from "../../services/users";
 import "./message.css";
 
 const Message = ({ own, message }) => {
@@ -10,10 +10,8 @@ const Message = ({ own, message }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await axios(
-          `https://chatvault.herokuapp.com/api/users/?userId=${message.sender}`
-        );
-        setUser(res.data);
+        const initialUser = await getUserById(message.sender);
+        setUser(initialUser);
       } catch (error) {
         console.log(error);
       }

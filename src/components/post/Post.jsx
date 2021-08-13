@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { MoreVert } from "@material-ui/icons";
-import "./post.css";
 import { AuthContext } from "../../context/AuthContext";
+import { getUserById } from "../../services/users";
+import { likeDislikePost } from "../../services/posts";
+import "./post.css";
 
 const Post = ({ post }) => {
   const [like, setLike] = useState(post.likes ? post.likes.length : 0);
@@ -20,20 +21,15 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(
-        `https://chatvault.herokuapp.com/api/users?userId=${post.userId}`
-      );
-      setUser(res.data);
+      const initialUser = await getUserById(post.userId);
+      setUser(initialUser);
     };
     fetchUser();
   }, [post.userId]);
 
   const likeHandler = async () => {
     try {
-      await axios.put(
-        `https://chatvault.herokuapp.com/api/posts/${post._id}/like`,
-        { userId: currentUser._id }
-      );
+      await likeDislikePost(post._id, { userId: currentUser._id });
     } catch (error) {
       console.log(error);
     }

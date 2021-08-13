@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import { useParams } from "react-router";
+import { getUserByName } from "../../services/users";
 import "./profile.css";
 
 export default function Profile() {
@@ -14,13 +14,11 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(
-        `https://chatvault.herokuapp.com/api/users/?username=${username}`
-      );
-      setUser(res.data);
+      const initialUser = await getUserByName(username);
+      setUser(initialUser);
     };
     fetchUser();
-  }, [username]); // we include it as a dependency because it is changeable
+  }, [username]);
 
   return (
     <>

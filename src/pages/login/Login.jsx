@@ -11,17 +11,17 @@ export default function Login() {
   const { isFetching, dispatch } = useContext(AuthContext);
   const history = useHistory();
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    loginCall(
+    await loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch
     );
   };
 
-  const handleDemoClick = (e) => {
+  const handleDemoClick = async (e) => {
     e.preventDefault();
-    loginCall({ email: `demo@gmail.com`, password: `123456` }, dispatch);
+    await loginCall({ email: `demo@gmail.com`, password: `123456` }, dispatch);
   };
 
   return (

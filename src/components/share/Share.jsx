@@ -2,8 +2,8 @@ import React, { useContext, useRef, useState } from "react";
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
 import { AuthContext } from "../../context/AuthContext";
 import { Cancel } from "@material-ui/icons";
+import { uploadPhoto, createPost } from "../../services/posts";
 import "./share.css";
-import axios from "axios";
 
 const shareItems = [
   {
@@ -39,13 +39,13 @@ const Share = () => {
       data.append("file", file);
       newPost.img = fileName;
       try {
-        await axios.post("https://chatvault.herokuapp.com/api/upload", data);
+        await uploadPhoto(data);
       } catch (error) {
         console.log(error);
       }
     }
     try {
-      await axios.post("https://chatvault.herokuapp.com/api/posts", newPost);
+      await createPost(newPost);
       window.location.reload(); // reload page to update post state
     } catch (error) {
       console.log(error);

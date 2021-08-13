@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
@@ -6,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Add, Remove } from "@material-ui/icons";
 import { AuthContext } from "../../context/AuthContext";
 import { Follow, Unfollow } from "../../context/AuthActions";
+import { getUserFriends, unfollowUser, followUser } from "../../services/users";
 import "./rightbar.css";
 
 const Rightbar = ({ user }) => {
@@ -21,10 +21,8 @@ const Rightbar = ({ user }) => {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get(
-          `https://chatvault.herokuapp.com/api/users/friends/${user?._id}`
-        );
-        setFriends(friendList.data);
+        const friendList = await getUserFriends(user?._id);
+        setFriends(friendList);
       } catch (error) {
         console.log(error);
       }
@@ -35,20 +33,14 @@ const Rightbar = ({ user }) => {
   const handleClick = async () => {
     try {
       if (followed) {
-        await axios.put(
-          `https://chatvault.herokuapp.com/api/users/${user._id}/unfollow`,
-          {
-            userId: currentUser._id,
-          }
-        );
+        await unfollowUser(user._id, {
+          userId: currentUser._id,
+        });
         dispatch(Unfollow(user._id));
       } else {
-        await axios.put(
-          `https://chatvault.herokuapp.com/api/users/${user._id}/follow`,
-          {
-            userId: currentUser._id,
-          }
-        );
+        await followUser(user._id, {
+          userId: currentUser._id,
+        });
         dispatch(Follow(user._id));
       }
       setFollowed(!followed);

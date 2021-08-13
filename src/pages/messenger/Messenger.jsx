@@ -6,6 +6,8 @@ import Topbar from "../../components/topbar/Topbar";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { io } from "socket.io-client";
+import { getAllConversations } from "../../services/conversations";
+import { getUserMessages, createMessage } from "../../services/messages";
 import "./messenger.css";
 
 const Messenger = () => {
@@ -54,10 +56,8 @@ const Messenger = () => {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get(
-          `https://chatvault.herokuapp.com/api/conversations/${user._id}`
-        );
-        setConversations(res.data);
+        const conversations = await getAllConversations(user._id);
+        setConversations(conversations);
       } catch (error) {
         console.log(error);
       }
@@ -68,10 +68,8 @@ const Messenger = () => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get(
-          `https://chatvault.herokuapp.com/api/messages/${currentChat?._id}`
-        );
-        setMessages(res.data);
+        const initialMessages = await getUserMessages(currentChat?._id);
+        setMessages(initialMessages);
       } catch (error) {
         console.log(error);
       }
@@ -102,11 +100,8 @@ const Messenger = () => {
     });
 
     try {
-      const res = await axios.post(
-        "https://chatvault.herokuapp.com/api/messages",
-        message
-      );
-      setMessages([...messages, res.data]);
+      const newMessage = await createMessage(message);
+      setMessages([...messages, newMessage]);
       setNewMessage("");
     } catch (error) {
       console.log(error);

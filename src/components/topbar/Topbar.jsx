@@ -9,7 +9,7 @@ const Topbar = () => {
   const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const handleLogout = (params) => {
+  const handleLogout = () => {
     window.localStorage.removeItem("user");
     dispatch(LogoutCall());
   };
