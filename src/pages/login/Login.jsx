@@ -1,9 +1,9 @@
 import { useContext, useRef } from "react";
-import "./login.css";
 import { loginCall } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 import { CircularProgress } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import "./login.css";
 
 export default function Login() {
   const email = useRef();
@@ -19,6 +19,11 @@ export default function Login() {
     );
   };
 
+  const handleDemoClick = (e) => {
+    e.preventDefault();
+    loginCall({ email: `demo@gmail.com`, password: `123456` }, dispatch);
+  };
+
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -29,7 +34,7 @@ export default function Login() {
           </span>
         </div>
         <div className="loginRight">
-          <form className="loginBox" onSubmit={handleClick}>
+          <form onSubmit={handleClick} className="loginBox">
             <input
               placeholder="Email"
               type="email"
@@ -50,6 +55,17 @@ export default function Login() {
                 <CircularProgress color="white" size="20px" />
               ) : (
                 "Log In"
+              )}
+            </button>
+            <button
+              onClick={handleDemoClick}
+              className="loginButton"
+              disabled={isFetching}
+            >
+              {isFetching ? (
+                <CircularProgress color="white" size="20px" />
+              ) : (
+                "Log In With Demo Account"
               )}
             </button>
             <span className="loginForgot">Forgot Password?</span>

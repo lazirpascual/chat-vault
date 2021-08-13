@@ -45,7 +45,7 @@ const Register = () => {
         <div className="loginLeft">
           <h3 className="loginLogo">Chat Vault</h3>
           <span className="loginDesc">
-            Connect with friends and the world around you on Chat Vault
+            Connect with friends and the world around you on Chat Vault.
           </span>
         </div>
         <div className="loginRight">
@@ -84,7 +84,7 @@ const Register = () => {
             >
               Already have an account? Log in
             </span>
-            <button type="submit" className="loginButton">
+            <button type="submit" className="loginRegisterButton">
               Sign Up
             </button>
           </form>

@@ -8,7 +8,7 @@
 }
 
 .loginWrapper {
-  width: 70%;
+  width: 1000px;
   height: 70%;
   display: flex;
 }
@@ -22,17 +22,19 @@
 }
 
 .loginLogo {
-  font-size: 50px;
+  font-size: 60px;
   font-weight: 800;
   color: #1775ee;
 }
 
 .loginDesc {
-  font-size: 24px;
+  margin-top: 15px;
+  font-size: 28px;
+  width: 80%;
 }
 
 .loginBox {
-  height: 380px;
+  height: 425px;
   padding: 20px;
   background-color: white;
   border-radius: 10px;
