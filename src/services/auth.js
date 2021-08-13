@@ -1,13 +1,12 @@
 import axios from "axios";
 import { LoginStart, LoginSuccess, LoginFailure } from "../context/AuthActions";
 
+const baseUrl = "https://chatvault.herokuapp.com/api/auth";
+
 export const loginCall = async (userCredential, dispatch) => {
   dispatch(LoginStart());
   try {
-    const response = await axios.post(
-      "https://chatvault.herokuapp.com/api/auth/login",
-      userCredential
-    );
+    const response = await axios.post(`${baseUrl}/login`, userCredential);
     dispatch(LoginSuccess(response.data));
   } catch (error) {
     dispatch(LoginFailure(error));
@@ -15,9 +14,6 @@ export const loginCall = async (userCredential, dispatch) => {
 };
 
 export const registerCall = async (user) => {
-  const response = await axios.post(
-    "https://chatvault.herokuapp.com/api/auth/register",
-    user
-  );
+  const response = await axios.post(`${baseUrl}/register`, user);
   return response.data;
 };

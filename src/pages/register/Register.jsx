@@ -26,7 +26,7 @@ const Register = () => {
       };
       try {
         const registerResponse = await registerCall(user);
-        const loginResponse = loginCall(
+        const loginResponse = await loginCall(
           { email: email.current.value, password: password.current.value },
           dispatch
         );
