@@ -35,14 +35,20 @@ const Rightbar = ({ user }) => {
   const handleClick = async () => {
     try {
       if (followed) {
-        await axios.put(`/users/${user._id}/unfollow`, {
-          userId: currentUser._id,
-        });
+        await axios.put(
+          `https://chatvault.herokuapp.com/api/users/${user._id}/unfollow`,
+          {
+            userId: currentUser._id,
+          }
+        );
         dispatch(Unfollow(user._id));
       } else {
-        await axios.put(`/users/${user._id}/follow`, {
-          userId: currentUser._id,
-        });
+        await axios.put(
+          `https://chatvault.herokuapp.com/api/users/${user._id}/follow`,
+          {
+            userId: currentUser._id,
+          }
+        );
         dispatch(Follow(user._id));
       }
       setFollowed(!followed);
