@@ -1,4 +1,5 @@
 import axios from "axios";
+import { token } from "./auth";
 
 const baseUrl = "https://chatvault.herokuapp.com/api/users";
 
@@ -18,17 +19,25 @@ export const getUserFriends = async (userId) => {
 };
 
 export const followUser = async (userToFollow, currentUser) => {
+  const config = {
+    headers: { Authorization: token },
+  };
   const response = await axios.put(
     `${baseUrl}/${userToFollow}/follow`,
-    currentUser
+    currentUser,
+    config
   );
   return response.data;
 };
 
 export const unfollowUser = async (userToFollow, currentUser) => {
+  const config = {
+    headers: { Authorization: token },
+  };
   const response = await axios.put(
     `${baseUrl}/${userToFollow}/unfollow`,
-    currentUser
+    currentUser,
+    config
   );
   return response.data;
 };
