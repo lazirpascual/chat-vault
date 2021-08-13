@@ -29,7 +29,7 @@ const Messenger = () => {
         createdAt: Date.now(),
       });
     });
-  }, []);
+  }, [onlineUsers]);
 
   useEffect(() => {
     // if socket message exists and if current chat is from sender, update message
