@@ -4,7 +4,6 @@ import Conversation from "../../components/conversations/Conversation";
 import Message from "../../components/message/Message";
 import Topbar from "../../components/topbar/Topbar";
 import { AuthContext } from "../../context/AuthContext";
-import axios from "axios";
 import { io } from "socket.io-client";
 import { getAllConversations } from "../../services/conversations";
 import { getUserMessages, createMessage } from "../../services/messages";
