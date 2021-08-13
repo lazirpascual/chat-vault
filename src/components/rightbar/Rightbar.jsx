@@ -19,18 +19,18 @@ const Rightbar = ({ user }) => {
   }, [user, currentUser]);
 
   useEffect(() => {
-    const getFriends = async (params) => {
+    const getFriends = async () => {
       try {
         const friendList = await axios.get(
-          `https://chatvault.herokuapp.com/api/users/friends/${user._id}`
+          `https://chatvault.herokuapp.com/api/users/friends/${user?._id}`
         );
         setFriends(friendList.data);
       } catch (error) {
         console.log(error);
       }
     };
-    getFriends();
-  }, [user, followed, currentUser?.followings]);
+    user?._id && getFriends();
+  }, [user]);
 
   const handleClick = async () => {
     try {
