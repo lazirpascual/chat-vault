@@ -1,6 +1,8 @@
-import React from "react";
-import { Users } from "../../dummyData";
-import "./sidebar.css";
+import React, { useEffect, useState, useContext } from "react";
+import Friends from "../friends/Friends";
+import { AuthContext } from "../../context/AuthContext";
+import { getUserFriends } from "../../services/users";
+import { Link } from "react-router-dom";
 import {
   RssFeed,
   Chat,
@@ -12,7 +14,7 @@ import {
   Event,
   School,
 } from "@material-ui/icons";
-import Friends from "../friends/Friends";
+import "./sidebar.css";
 
 const sidebarItems = [
   { icon: <RssFeed className="sidebarIcon" />, name: "Feed" },
@@ -30,6 +32,21 @@ const sidebarItems = [
 ];
 
 const Sidebar = () => {
+  const [friends, setFriends] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    const getFriends = async () => {
+      try {
+        const friendList = await getUserFriends(user?._id);
+        setFriends(friendList);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    user?._id && getFriends();
+  }, [user]);
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -43,9 +60,18 @@ const Sidebar = () => {
         </ul>
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
+        <h3 className="sidebarTitle">Friends ({friends.length})</h3>
         <ul className="sidebarFriendList">
-          {Users.map((u) => (
-            <Friends key={u.id} user={u} />
+          {friends.map((friend) => (
+            <>
+              <Link
+                to={`/profile/${friend.username}`}
+                style={{ textDecoration: "none", color: "black" }}
+                key={friend.username}
+              >
+                <Friends key={friend.id} user={friend} />
+              </Link>
+            </>
           ))}
         </ul>
       </div>

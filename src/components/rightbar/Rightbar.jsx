@@ -106,7 +106,7 @@ const Rightbar = ({ user }) => {
           {friends.map((friend) => (
             <Link
               to={`/profile/${friend.username}`}
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", color: "black" }}
               key={friend.username}
             >
               <div className="rightbarFollowing">
@@ -131,7 +131,6 @@ const Rightbar = ({ user }) => {
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
-        {/* if profile prop exists, render profile rightbar. Otherwise, render home rightbar */}
         {user ? ProfileRightbar() : HomeRightbar()}
       </div>
     </div>
