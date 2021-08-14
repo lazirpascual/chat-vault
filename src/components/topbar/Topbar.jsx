@@ -29,7 +29,7 @@ const Topbar = ({ setSearchTerm }) => {
         </Link>
       </div>
       <div className="topbarCenter" onClick={() => history.push(`/search`)}>
-        <form className="searchBar" onSubmit={() => history.push(`/search`)}>
+        <form className="searchBar">
           <Search className="searchIcon" />
           <input
             ref={inputRef}

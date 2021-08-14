@@ -2,6 +2,7 @@ import axios from "axios";
 import { token } from "./auth";
 
 const baseUrl = "https://chatvault.herokuapp.com/api/users";
+//const baseUrl = "/api/users";
 
 export const getUserById = async (userId) => {
   const response = await axios.get(`${baseUrl}/?userId=${userId}`);
