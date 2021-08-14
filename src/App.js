@@ -3,6 +3,7 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import Messenger from "./pages/messenger/Messenger";
+import Search from "./pages/search/Search";
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,6 +31,7 @@ function App() {
         <Route path="/profile/:username">
           {user ? <Profile /> : <Login />}
         </Route>
+        <Route path="/search">{user ? <Search /> : <Login />}</Route>
       </Switch>
     </Router>
   );

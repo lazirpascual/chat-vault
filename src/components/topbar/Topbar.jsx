@@ -1,13 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import "./topbar.css";
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { LogoutCall } from "../../context/AuthActions";
+import { useHistory } from "react-router";
 
-const Topbar = () => {
+const Topbar = ({ setSearchTerm }) => {
   const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const history = useHistory();
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    setSearchTerm && inputRef.current.focus();
+  }, [setSearchTerm]);
 
   const handleLogout = () => {
     window.localStorage.removeItem("user");
@@ -21,14 +28,16 @@ const Topbar = () => {
           <span className="logo">Chat Vault</span>
         </Link>
       </div>
-      <div className="topbarCenter">
-        <div className="searchBar">
+      <div className="topbarCenter" onClick={() => history.push(`/search`)}>
+        <form className="searchBar" onSubmit={() => history.push(`/search`)}>
           <Search className="searchIcon" />
           <input
+            ref={inputRef}
             placeholder="Search for friend, post or video"
             className="searchInput"
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-        </div>
+        </form>
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">

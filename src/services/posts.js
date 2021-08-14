@@ -4,6 +4,11 @@ import { token } from "./auth";
 const baseUrl = "https://chatvault.herokuapp.com/api/posts";
 // const baseUrl = "/api/posts";
 
+export const getAllPosts = async () => {
+  const response = await axios.get(baseUrl);
+  return response.data;
+};
+
 export const getProfilePosts = async (username) => {
   const response = await axios.get(`${baseUrl}/profile/${username}`);
   return response.data;

@@ -73,7 +73,6 @@
   height: 24px;
   margin-right: 5px;
   cursor: pointer;
-  background-color: rgb(82, 154, 221);
 }
 
 .likeIconPressed {
@@ -81,7 +80,7 @@
   height: 24px;
   margin-right: 5px;
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .postLikeCounter {

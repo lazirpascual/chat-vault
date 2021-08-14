@@ -2,16 +2,30 @@ import React, { useState, useEffect, useContext } from "react";
 import Share from "../share/Share";
 import Post from "../post/Post";
 import { AuthContext } from "../../context/AuthContext";
-import { getProfilePosts, getTimelinePosts } from "../../services/posts";
+import {
+  getProfilePosts,
+  getTimelinePosts,
+  getAllPosts,
+} from "../../services/posts";
 import "./feed.css";
 
-const Feed = ({ username }) => {
+const Feed = ({ username, search }) => {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    const filterSearchedPost = async () => {
+      const allPosts = await getAllPosts();
+      const filteredPosts = allPosts.filter((post) =>
+        post.desc.toLowerCase().match(search)
+      );
+      return filteredPosts;
+    };
+
     const fetchPosts = async () => {
-      const initialPosts = username
+      const initialPosts = search
+        ? await filterSearchedPost()
+        : username
         ? await getProfilePosts(username)
         : await getTimelinePosts(user._id);
       setPosts(
@@ -22,7 +36,7 @@ const Feed = ({ username }) => {
       );
     };
     fetchPosts();
-  }, [username, user?._id]);
+  }, [username, user?._id, search]);
 
   return (
     <div className="feed">

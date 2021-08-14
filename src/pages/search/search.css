@@ -1,0 +1,24 @@
+.searchLeft {
+  flex: 5;
+}
+.searchRight {
+  flex: 7;
+}
+
+.searchText {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  top: 10%;
+  font-size: 50px;
+  color: rgb(170, 167, 167);
+  cursor: default;
+}
+
+.postsText {
+  margin-top: 30px;
+  margin-bottom: -30px;
+  margin-left: 20px;
+  font-size: 30px;
+  font-weight: 700;
+}
