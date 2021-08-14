@@ -75,6 +75,10 @@
   cursor: pointer;
 }
 
+.likeIconPressed:hover {
+  opacity: 1;
+}
+
 .likeIconPressed {
   width: 24px;
   height: 24px;
