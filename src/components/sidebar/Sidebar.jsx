@@ -63,15 +63,14 @@ const Sidebar = () => {
         <h3 className="sidebarTitle">Friends ({friends.length})</h3>
         <ul className="sidebarFriendList">
           {friends.map((friend) => (
-            <>
+            <div key={friend.username}>
               <Link
                 to={`/profile/${friend.username}`}
                 style={{ textDecoration: "none", color: "black" }}
-                key={friend.username}
               >
                 <Friends key={friend.id} user={friend} />
               </Link>
-            </>
+            </div>
           ))}
         </ul>
       </div>

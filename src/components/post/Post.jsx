@@ -72,13 +72,13 @@ const Post = ({ post }) => {
         <div className="postBottom">
           <div className="postBottomLeft">
             <img
-              className="likeIcon"
+              className={isLiked ? "likeIcon" : "likeIconPressed"}
               src={`${PF}like.png`}
               onClick={likeHandler}
               alt=""
             />
             <img
-              className="likeIcon"
+              className="likeIconPressed"
               src={`${PF}heart.png`}
               onClick={likeHandler}
               alt=""
