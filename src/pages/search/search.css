@@ -1,8 +1,54 @@
 .searchLeft {
-  flex: 5;
+  flex: 6;
 }
+
 .searchRight {
-  flex: 7;
+  flex: 6;
+}
+
+.searchUsersCard {
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin: 50px 20px 30px 20px;
+}
+
+.searchUsersWrapper {
+  padding: 20px;
+}
+
+.searchUsersList {
+  display: flex;
+  align-items: center;
+}
+
+.searchUsersList:hover {
+  text-decoration: underline;
+}
+
+.searchUsersImg {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 25px;
+}
+
+.searchUsersName {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.searchUserHr {
+  margin: 20px 0;
+  border: 1px solid rgb(182, 184, 182);
+}
+
+.searchTerm {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 22px;
+  font-weight: 400;
 }
 
 .searchText {
@@ -17,6 +63,7 @@
 
 .postsText {
   margin-top: 30px;
+  margin-bottom: -20px;
   margin-left: 20px;
   font-size: 30px;
   font-weight: 700;

@@ -3,7 +3,6 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import { getAllUsers } from "../../services/users";
-import Friends from "../../components/friends/Friends";
 import { Link } from "react-router-dom";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import "./search.css";
@@ -13,6 +12,7 @@ const Search = () => {
   // and it doesn't pass an empty search term to Feed
   const [searchTerm, setSearchTerm] = useState(`.,/sdfe12z09=23.ds'`);
   const [searchedUsers, setSearchedUsers] = useState([]);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -33,20 +33,28 @@ const Search = () => {
 
   const MapSearchedUsers = () => {
     return (
-      <>
-        <ul className="sidebarFriendList">
+      <div className="searchUsersCard">
+        <ul className="searchUsersWrapper">
           {searchedUsers.map((user) => (
             <div key={user.username}>
               <Link
                 to={`/profile/${user.username}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <Friends key={user.id} user={user} />
+                <li className="searchUsersList">
+                  <img
+                    src={PF + user.profilePicture}
+                    alt=""
+                    className="searchUsersImg"
+                  />
+                  <span className="searchUsersName">{user.username}</span>
+                </li>
               </Link>
+              <hr className="searchUserHr" />
             </div>
           ))}
         </ul>
-      </>
+      </div>
     );
   };
 
@@ -71,6 +79,10 @@ const Search = () => {
         <Sidebar className="searchLeft" />
         <div className="searchRight">
           <div className="searchText">Search for Friends, Posts, or Videos</div>
+          <div className="searchTerm">
+            Search Results for
+            {searchTerm === `.,/sdfe12z09=23.ds'` ? ` " "` : ` "${searchTerm}"`}
+          </div>
           <div className="postsText">People</div>
           {searchedUsers.length > 0 ? MapSearchedUsers() : NoPostsMessage()}
           <div className="postsText">Posts</div>
