@@ -5,9 +5,10 @@ import { MoreVert } from "@material-ui/icons";
 import { AuthContext } from "../../context/AuthContext";
 import { getUserById } from "../../services/users";
 import { likeDislikePost } from "../../services/posts";
+import Highlighter from "react-highlight-words";
 import "./post.css";
 
-const Post = ({ post }) => {
+const Post = ({ post, search }) => {
   const [like, setLike] = useState(post.likes ? post.likes.length : 0);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
@@ -66,7 +67,14 @@ const Post = ({ post }) => {
           </div>
         </div>
         <div className="postCenter">
-          <span className="postText">{post?.desc}</span>
+          <span className="postText">
+            <Highlighter
+              highlightClassName="YourHighlightClass"
+              searchWords={[search]}
+              autoEscape={true}
+              textToHighlight={post?.desc}
+            />
+          </span>
           <img src={PF + post.img} alt="Post" className="postImg" />
         </div>
         <div className="postBottom">

@@ -5,6 +5,7 @@ import Feed from "../../components/feed/Feed";
 import { getAllUsers } from "../../services/users";
 import { Link } from "react-router-dom";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import Highlighter from "react-highlight-words";
 import "./search.css";
 
 const Search = () => {
@@ -47,7 +48,14 @@ const Search = () => {
                     alt=""
                     className="searchUsersImg"
                   />
-                  <span className="searchUsersName">{user.username}</span>
+                  <span className="searchUsersName">
+                    <Highlighter
+                      highlightClassName="YourHighlightClass"
+                      searchWords={[searchTerm]}
+                      autoEscape={true}
+                      textToHighlight={user.username}
+                    />
+                  </span>
                 </li>
               </Link>
               <hr className="searchUserHr" />

@@ -72,7 +72,9 @@ const Feed = ({ username, search }) => {
       <div className="feedWrapper">
         {(!username || username === user?.username) && <Share />}
         {posts.length > 0
-          ? posts.map((p) => <Post key={p._id} post={p} />)
+          ? posts.map((p) => (
+              <Post key={p._id} post={p} search={search ? search : null} />
+            ))
           : NoPostsMessage()}
       </div>
     </div>
