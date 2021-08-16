@@ -7,6 +7,7 @@ import {
   getTimelinePosts,
   getAllPosts,
 } from "../../services/posts";
+import AddAPhotoOutlinedIcon from "@material-ui/icons/AddAPhotoOutlined";
 import "./feed.css";
 
 const Feed = ({ username, search }) => {
@@ -43,15 +44,31 @@ const Feed = ({ username, search }) => {
     fetchPosts();
   }, [username, user?._id, search]);
 
+  const NoPostsMessage = () => {
+    return (
+      <>
+        {search ? (
+          <div>
+            We didn't find any results. Make sure everything is spelled
+            correctly or try different keywords.
+          </div>
+        ) : (
+          <div className="noPosts">
+            <AddAPhotoOutlinedIcon className="noPostsIcon" />
+            <div className="noPostsText">No Posts Yet</div>
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
     <div className="feed">
       <div className="feedWrapper">
         {(!username || username === user?.username) && <Share />}
-        {posts.length > 0 ? (
-          posts.map((p) => <Post key={p._id} post={p} />)
-        ) : (
-          <div>There are no matches for that post</div>
-        )}
+        {posts.length > 0
+          ? posts.map((p) => <Post key={p._id} post={p} />)
+          : NoPostsMessage()}
       </div>
     </div>
   );

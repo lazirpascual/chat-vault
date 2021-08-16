@@ -8,7 +8,9 @@ import { Link } from "react-router-dom";
 import "./search.css";
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState(null);
+  // initialize search term to unsearchable string so it doesnt search for whitespace,
+  // and it doesn't pass an empty search term to Feed
+  const [searchTerm, setSearchTerm] = useState(`.,/sdfe12z09=23.ds'`);
   const [searchedUsers, setSearchedUsers] = useState([]);
 
   useEffect(() => {
@@ -24,9 +26,7 @@ const Search = () => {
 
   useEffect(() => {
     if (!searchTerm) {
-      // set search term to "null" so it doesnt search for whitespace,
-      // and it doesn't pass an empty search term to Feed
-      setSearchTerm(`null`);
+      setSearchTerm(`.,/sdfe12z09=23.ds'`);
     }
   }, [searchTerm]);
 
@@ -49,14 +49,6 @@ const Search = () => {
     );
   };
 
-  const NoUsers = () => {
-    return (
-      <>
-        <div>There are no matches for that user</div>
-      </>
-    );
-  };
-
   return (
     <>
       <Topbar setSearchTerm={setSearchTerm} />
@@ -65,7 +57,14 @@ const Search = () => {
         <div className="searchRight">
           <div className="searchText">Search for Friends, Posts, or Videos</div>
           <div className="postsText">People</div>
-          {searchedUsers.length > 0 ? MapSearchedUsers() : NoUsers()}
+          {searchedUsers.length > 0 ? (
+            MapSearchedUsers()
+          ) : (
+            <div>
+              We didn't find any results. Make sure everything is spelled
+              correctly or try different keywords.
+            </div>
+          )}
           <div className="postsText">Posts</div>
           <Feed search={searchTerm} username="search" />
         </div>

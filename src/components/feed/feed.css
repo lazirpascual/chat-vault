@@ -5,3 +5,20 @@
 .feedWrapper {
   padding: 20px;
 }
+
+.noPosts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.noPostsText {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.noPostsIcon {
+  padding: 50px 0 20px 0;
+  font-size: 70px !important;
+}
