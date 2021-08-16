@@ -1,0 +1,13 @@
+.updatePost {
+  color: black !important;
+}
+
+.modifyPostContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 25px;
+}
+
+.modifyPostButtons {
+  padding: 15px 0 !important;
+}

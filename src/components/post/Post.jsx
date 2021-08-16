@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
-import { MoreVert } from "@material-ui/icons";
+import ModifyPost from "../modifyPost/ModifyPost";
 import { AuthContext } from "../../context/AuthContext";
 import { getUserById } from "../../services/users";
 import { likeDislikePost } from "../../services/posts";
@@ -63,7 +63,7 @@ const Post = ({ post, search }) => {
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
-            <MoreVert />
+            <ModifyPost />
           </div>
         </div>
         <div className="postCenter">
