@@ -15,11 +15,15 @@ const Feed = ({ username, search }) => {
 
   useEffect(() => {
     const filterSearchedPost = async () => {
-      const allPosts = await getAllPosts();
-      const filteredPosts = allPosts.filter((post) =>
-        post.desc.toLowerCase().match(search)
-      );
-      return filteredPosts;
+      try {
+        const allPosts = await getAllPosts();
+        const filteredPosts = allPosts.filter((post) =>
+          post.desc.toLowerCase().match(search)
+        );
+        return filteredPosts;
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     const fetchPosts = async () => {
@@ -30,9 +34,10 @@ const Feed = ({ username, search }) => {
         : await getTimelinePosts(user._id);
       setPosts(
         // sorts posts by most recent
-        initialPosts.sort((p1, p2) => {
-          return new Date(p2.createdAt) - new Date(p1.createdAt);
-        })
+        initialPosts &&
+          initialPosts.sort((p1, p2) => {
+            return new Date(p2.createdAt) - new Date(p1.createdAt);
+          })
       );
     };
     fetchPosts();
@@ -42,9 +47,11 @@ const Feed = ({ username, search }) => {
     <div className="feed">
       <div className="feedWrapper">
         {(!username || username === user?.username) && <Share />}
-        {posts.map((p) => (
-          <Post key={p._id} post={p} />
-        ))}
+        {posts.length > 0 ? (
+          posts.map((p) => <Post key={p._id} post={p} />)
+        ) : (
+          <div>There are no matches for that post</div>
+        )}
       </div>
     </div>
   );

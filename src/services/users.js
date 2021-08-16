@@ -1,16 +1,21 @@
 import axios from "axios";
 import { token } from "./auth";
 
-const baseUrl = "https://chatvault.herokuapp.com/api/users";
-//const baseUrl = "/api/users";
+//const baseUrl = "https://chatvault.herokuapp.com/api/users";
+const baseUrl = "/api/users";
+
+export const getAllUsers = async () => {
+  const response = await axios.get(baseUrl);
+  return response.data;
+};
 
 export const getUserById = async (userId) => {
-  const response = await axios.get(`${baseUrl}/?userId=${userId}`);
+  const response = await axios.get(`${baseUrl}/find/?userId=${userId}`);
   return response.data;
 };
 
 export const getUserByName = async (username) => {
-  const response = await axios.get(`${baseUrl}/?username=${username}`);
+  const response = await axios.get(`${baseUrl}/find/?username=${username}`);
   return response.data;
 };
 
