@@ -63,7 +63,7 @@ const Post = ({ post, search }) => {
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
-            <ModifyPost />
+            <ModifyPost user={currentUser} post={post} />
           </div>
         </div>
         <div className="postCenter">
