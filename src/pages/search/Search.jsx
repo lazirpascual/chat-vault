@@ -5,6 +5,7 @@ import Feed from "../../components/feed/Feed";
 import { getAllUsers } from "../../services/users";
 import Friends from "../../components/friends/Friends";
 import { Link } from "react-router-dom";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import "./search.css";
 
 const Search = () => {
@@ -49,6 +50,20 @@ const Search = () => {
     );
   };
 
+  const NoPostsMessage = () => {
+    return (
+      <div className="noUsers">
+        <ErrorOutlineIcon style={{ fontSize: 40, color: "red" }} />
+        <div className="noUsersTextTitle">
+          We didn't find any users with that name.
+        </div>
+        <div className="noUsersText">
+          Make sure everything is spelled correctly or try different keywords.
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <Topbar setSearchTerm={setSearchTerm} />
@@ -57,14 +72,7 @@ const Search = () => {
         <div className="searchRight">
           <div className="searchText">Search for Friends, Posts, or Videos</div>
           <div className="postsText">People</div>
-          {searchedUsers.length > 0 ? (
-            MapSearchedUsers()
-          ) : (
-            <div>
-              We didn't find any results. Make sure everything is spelled
-              correctly or try different keywords.
-            </div>
-          )}
+          {searchedUsers.length > 0 ? MapSearchedUsers() : NoPostsMessage()}
           <div className="postsText">Posts</div>
           <Feed search={searchTerm} username="search" />
         </div>

@@ -8,6 +8,7 @@ import {
   getAllPosts,
 } from "../../services/posts";
 import AddAPhotoOutlinedIcon from "@material-ui/icons/AddAPhotoOutlined";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import "./feed.css";
 
 const Feed = ({ username, search }) => {
@@ -48,9 +49,13 @@ const Feed = ({ username, search }) => {
     return (
       <>
         {search ? (
-          <div>
-            We didn't find any results. Make sure everything is spelled
-            correctly or try different keywords.
+          <div className="noUsers">
+            <ErrorOutlineIcon style={{ fontSize: 40, color: "red" }} />
+            <div className="noUsersTextTitle">We didn't find any results.</div>
+            <div className="noUsersText">
+              Make sure everything is spelled correctly or try different
+              keywords.
+            </div>
           </div>
         ) : (
           <div className="noPosts">
