@@ -69,7 +69,6 @@ const Post = ({ post, search }) => {
         <div className="postCenter">
           <span className="postText">
             <Highlighter
-              highlightClassName="YourHighlightClass"
               searchWords={[search]}
               autoEscape={true}
               textToHighlight={post?.desc}

@@ -44,13 +44,16 @@ const Search = () => {
               >
                 <li className="searchUsersList">
                   <img
-                    src={PF + user.profilePicture}
+                    src={
+                      user?.profilePicture
+                        ? `${PF}${user?.profilePicture}`
+                        : `${PF}person/noAvatar.png`
+                    }
                     alt=""
                     className="searchUsersImg"
                   />
                   <span className="searchUsersName">
                     <Highlighter
-                      highlightClassName="YourHighlightClass"
                       searchWords={[searchTerm]}
                       autoEscape={true}
                       textToHighlight={user.username}
