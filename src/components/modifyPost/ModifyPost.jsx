@@ -12,11 +12,13 @@ import "./modifyPost.css";
 
 const ModifyPost = ({ userId, post, deletePost }) => {
   const handleDelete = async () => {
-    try {
-      await removePost(post._id, userId);
-      deletePost(post._id);
-    } catch (error) {
-      console.log(error);
+    if (window.confirm("Remove This Post?")) {
+      try {
+        await removePost(post._id, userId);
+        deletePost(post._id);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
