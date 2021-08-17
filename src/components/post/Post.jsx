@@ -6,12 +6,16 @@ import { AuthContext } from "../../context/AuthContext";
 import { getUserById } from "../../services/users";
 import { likeDislikePost } from "../../services/posts";
 import Highlighter from "react-highlight-words";
+import { TextField, IconButton } from "@material-ui/core";
+import SaveIcon from "@material-ui/icons/Save";
 import "./post.css";
 
 const Post = ({ post, search, deletePost }) => {
   const [like, setLike] = useState(post.likes ? post.likes.length : 0);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+  const [editDesc, setEditDesc] = useState(false);
+  const [desc, setDesc] = useState(post?.desc);
   const { user: currentUser } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -36,6 +40,14 @@ const Post = ({ post, search, deletePost }) => {
     }
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
+  };
+
+  const handleEditClick = () => {
+    setEditDesc(true);
+  };
+
+  const handleSave = () => {
+    setEditDesc(false);
   };
 
   return (
@@ -67,16 +79,34 @@ const Post = ({ post, search, deletePost }) => {
               userId={currentUser._id}
               post={post}
               deletePost={deletePost}
+              handleEditClick={handleEditClick}
             />
           </div>
         </div>
         <div className="postCenter">
           <span className="postText">
-            <Highlighter
-              searchWords={[search]}
-              autoEscape={true}
-              textToHighlight={post?.desc}
-            />
+            {editDesc === false ? (
+              <Highlighter
+                searchWords={[search]}
+                autoEscape={true}
+                textToHighlight={desc}
+              />
+            ) : (
+              <>
+                <TextField
+                  label="Post Description"
+                  autoFocus={true}
+                  variant="filled"
+                  color="primary"
+                  value={desc}
+                  onChange={(e) => setDesc(e.target.value)}
+                  style={{ width: 500 }}
+                ></TextField>
+                <IconButton onClick={handleSave}>
+                  <SaveIcon style={{ fontSize: 35, marginLeft: 5 }} />
+                </IconButton>
+              </>
+            )}
           </span>
           <img src={PF + post.img} alt="Post" className="postImg" />
         </div>

@@ -10,7 +10,7 @@ import ShareIcon from "@material-ui/icons/Share";
 import { removePost } from "../../services/posts";
 import "./modifyPost.css";
 
-const ModifyPost = ({ userId, post, deletePost }) => {
+const ModifyPost = ({ userId, post, deletePost, handleEditClick }) => {
   const handleDelete = async () => {
     if (window.confirm("Remove This Post?")) {
       try {
@@ -43,7 +43,10 @@ const ModifyPost = ({ userId, post, deletePost }) => {
             <div className="modifyPostContainer">
               {userId === post.userId && (
                 <>
-                  <Button className="modifyPostButtons">
+                  <Button
+                    className="modifyPostButtons"
+                    onClick={handleEditClick}
+                  >
                     <EditOutlinedIcon />
                     <div className="editText">Edit</div>
                   </Button>
