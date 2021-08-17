@@ -7,9 +7,19 @@ import { IconButton } from "@material-ui/core";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import ShareIcon from "@material-ui/icons/Share";
+import { removePost } from "../../services/posts";
 import "./modifyPost.css";
 
-const ModifyPost = ({ user, post }) => {
+const ModifyPost = ({ userId, post, deletePost }) => {
+  const handleDelete = async () => {
+    try {
+      await removePost(post._id, userId);
+      deletePost(post._id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
@@ -29,13 +39,13 @@ const ModifyPost = ({ user, post }) => {
             }}
           >
             <div className="modifyPostContainer">
-              {user._id === post.userId && (
+              {userId === post.userId && (
                 <>
                   <Button className="modifyPostButtons">
                     <EditOutlinedIcon />
                     <div className="editText">Edit</div>
                   </Button>
-                  <Button className="modifyPostButtons">
+                  <Button className="modifyPostButtons" onClick={handleDelete}>
                     <DeleteForeverIcon />
                     <div className="editText">Delete</div>
                   </Button>

@@ -8,7 +8,7 @@ import { likeDislikePost } from "../../services/posts";
 import Highlighter from "react-highlight-words";
 import "./post.css";
 
-const Post = ({ post, search }) => {
+const Post = ({ post, search, deletePost }) => {
   const [like, setLike] = useState(post.likes ? post.likes.length : 0);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
@@ -63,7 +63,11 @@ const Post = ({ post, search }) => {
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
-            <ModifyPost user={currentUser} post={post} />
+            <ModifyPost
+              userId={currentUser._id}
+              post={post}
+              deletePost={deletePost}
+            />
           </div>
         </div>
         <div className="postCenter">

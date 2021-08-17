@@ -45,6 +45,29 @@ const Feed = ({ username, search }) => {
     fetchPosts();
   }, [username, user?._id, search]);
 
+  const addPost = (newPost) => {
+    setPosts(
+      [...posts, newPost].sort((p1, p2) => {
+        return new Date(p2.createdAt) - new Date(p1.createdAt);
+      })
+    );
+  };
+
+  const deletePost = (postId) => {
+    setPosts(posts.filter((post) => post._id !== postId));
+  };
+
+  const changeState = () => {
+    const postId = "611bf1aca828209e1027b5ae";
+
+    setPosts(
+      posts.filter((post) => {
+        console.log(post._id);
+        return post._id !== postId;
+      })
+    );
+  };
+
   const NoPostsMessage = () => {
     return (
       <>
@@ -69,11 +92,19 @@ const Feed = ({ username, search }) => {
 
   return (
     <div className="feed">
+      <button onClick={changeState}>Change the state</button>
       <div className="feedWrapper">
-        {(!username || username === user?.username) && <Share />}
+        {(!username || username === user?.username) && (
+          <Share addPost={addPost} />
+        )}
         {posts.length > 0
           ? posts.map((p) => (
-              <Post key={p._id} post={p} search={search ? search : null} />
+              <Post
+                key={p._id}
+                post={p}
+                search={search ? search : null}
+                deletePost={deletePost}
+              />
             ))
           : NoPostsMessage()}
       </div>

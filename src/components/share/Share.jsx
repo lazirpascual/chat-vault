@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
 import { AuthContext } from "../../context/AuthContext";
 import { Cancel } from "@material-ui/icons";
@@ -20,17 +20,18 @@ const shareItems = [
   },
 ];
 
-const Share = () => {
+const Share = ({ addPost }) => {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const desc = useRef();
+  const [desc, setDesc] = useState("");
+  //const desc = useRef();
   const [file, setFile] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const newPost = {
       userId: user._id,
-      desc: desc.current.value,
+      desc: desc,
     };
     if (file) {
       const data = new FormData();
@@ -45,8 +46,10 @@ const Share = () => {
       }
     }
     try {
-      await createPost(newPost);
-      window.location.reload(); // reload page to update post state
+      const response = await createPost(newPost);
+      addPost(response);
+      setFile(null);
+      setDesc("");
     } catch (error) {
       console.log(error);
     }
@@ -66,9 +69,10 @@ const Share = () => {
             className="shareProfileImg"
           />
           <input
+            value={desc}
             placeholder={`What's on your mind, ${user.username}?`}
             className="shareInput"
-            ref={desc}
+            onChange={(e) => setDesc(e.target.value)}
           />
         </div>
         <hr className="shareHr" />

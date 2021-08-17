@@ -1,8 +1,8 @@
 import axios from "axios";
 import { token } from "./auth";
 
-const baseUrl = "https://chatvault.herokuapp.com/api/posts";
-// const baseUrl = "/api/posts";
+// const baseUrl = "https://chatvault.herokuapp.com/api/posts";
+const baseUrl = "/api/posts";
 
 export const getAllPosts = async () => {
   const response = await axios.get(baseUrl);
@@ -32,6 +32,14 @@ export const createPost = async (newPost) => {
     headers: { Authorization: token },
   };
   const response = await axios.post(baseUrl, newPost, config);
+  return response.data;
+};
+
+export const removePost = async (postId, userId) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.delete(`${baseUrl}/${postId}/${userId}`, config);
   return response.data;
 };
 
