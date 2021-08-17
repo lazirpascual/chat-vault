@@ -57,17 +57,6 @@ const Feed = ({ username, search }) => {
     setPosts(posts.filter((post) => post._id !== postId));
   };
 
-  const changeState = () => {
-    const postId = "611bf1aca828209e1027b5ae";
-
-    setPosts(
-      posts.filter((post) => {
-        console.log(post._id);
-        return post._id !== postId;
-      })
-    );
-  };
-
   const NoPostsMessage = () => {
     return (
       <>
@@ -92,7 +81,6 @@ const Feed = ({ username, search }) => {
 
   return (
     <div className="feed">
-      <button onClick={changeState}>Change the state</button>
       <div className="feedWrapper">
         {(!username || username === user?.username) && (
           <Share addPost={addPost} />
