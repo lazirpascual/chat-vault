@@ -57,6 +57,10 @@ const Feed = ({ username, search }) => {
     setPosts(posts.filter((post) => post._id !== postId));
   };
 
+  const updatePost = (newPost) => {
+    setPosts(posts.map((post) => (post._id !== newPost._id ? post : newPost)));
+  };
+
   const NoPostsMessage = () => {
     return (
       <>
@@ -92,6 +96,7 @@ const Feed = ({ username, search }) => {
                 post={p}
                 search={search ? search : null}
                 deletePost={deletePost}
+                updatePost={updatePost}
               />
             ))
           : NoPostsMessage()}

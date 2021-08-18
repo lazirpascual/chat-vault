@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import ModifyPost from "../modifyPost/ModifyPost";
 import { AuthContext } from "../../context/AuthContext";
 import { getUserById } from "../../services/users";
-import { likeDislikePost } from "../../services/posts";
+import { likeDislikePost, updatePostService } from "../../services/posts";
 import Highlighter from "react-highlight-words";
 import { TextField, IconButton } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import "./post.css";
 
-const Post = ({ post, search, deletePost }) => {
+const Post = ({ post, search, deletePost, updatePost }) => {
   const [like, setLike] = useState(post.likes ? post.likes.length : 0);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
@@ -46,8 +46,16 @@ const Post = ({ post, search, deletePost }) => {
     setEditDesc(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setEditDesc(false);
+    const updatedPost = { ...post, desc: desc };
+
+    try {
+      const postResponse = await updatePostService(post._id, updatedPost);
+      updatePost(postResponse);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -93,18 +101,20 @@ const Post = ({ post, search, deletePost }) => {
               />
             ) : (
               <>
-                <TextField
-                  label="Post Description"
-                  autoFocus={true}
-                  variant="filled"
-                  color="primary"
-                  value={desc}
-                  onChange={(e) => setDesc(e.target.value)}
-                  style={{ width: 500 }}
-                ></TextField>
-                <IconButton onClick={handleSave}>
-                  <SaveIcon style={{ fontSize: 35, marginLeft: 5 }} />
-                </IconButton>
+                <form onSubmit={handleSave}>
+                  <TextField
+                    label="Post Description"
+                    autoFocus={true}
+                    variant="filled"
+                    color="primary"
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                    style={{ width: 500 }}
+                  ></TextField>
+                  <IconButton type="submit">
+                    <SaveIcon style={{ fontSize: 30, marginLeft: 5 }} />
+                  </IconButton>
+                </form>
               </>
             )}
           </span>

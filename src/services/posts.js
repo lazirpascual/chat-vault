@@ -43,6 +43,14 @@ export const removePost = async (postId, userId) => {
   return response.data;
 };
 
+export const updatePostService = async (postId, updatedPost) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.put(`${baseUrl}/${postId}`, updatedPost, config);
+  return response.data;
+};
+
 export const uploadPhoto = async (photo) => {
   const config = {
     headers: { Authorization: token },
