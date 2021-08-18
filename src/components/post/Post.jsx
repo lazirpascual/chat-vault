@@ -12,13 +12,14 @@ import Comment from "../comment/Comment";
 import "./post.css";
 
 const Post = ({ post, search, deletePost, updatePost }) => {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user: currentUser } = useContext(AuthContext);
   const [like, setLike] = useState(post.likes ? post.likes.length : 0);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
   const [editDesc, setEditDesc] = useState(false);
   const [desc, setDesc] = useState(post?.desc);
-  const { user: currentUser } = useContext(AuthContext);
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [viewComments, setViewComments] = useState(false);
 
   useEffect(() => {
     // if the post.likes array already includes current id, the post is already liked
@@ -50,10 +51,9 @@ const Post = ({ post, search, deletePost, updatePost }) => {
   const handleSave = async () => {
     setEditDesc(false);
     const updatedPost = { ...post, desc: desc };
-
     try {
-      const postResponse = await updatePostService(post._id, updatedPost);
-      updatePost(postResponse);
+      await updatePostService(post._id, updatedPost);
+      updatePost(updatedPost);
     } catch (error) {
       console.log(error);
     }
@@ -139,14 +139,25 @@ const Post = ({ post, search, deletePost, updatePost }) => {
               {like} People liked this post
             </span>
           </div>
-          <div className="postBottomRight">
+          <div
+            className="postBottomRight"
+            onClick={() => setViewComments(!viewComments)}
+          >
             <span className="postCommentText">
-              {post.comment} {post.comment > 1 ? `comments` : `comment`}
+              {post.comments.length}{" "}
+              {post.comments.length !== 1 ? `comments` : `comment`}
             </span>
           </div>
         </div>
         <hr className="postHr" />
-        <Comment currentUser={currentUser} />
+        <Comment
+          currentUser={currentUser}
+          postComments={post.comments}
+          viewComments={viewComments}
+          setViewComments={setViewComments}
+          post={post}
+          updatePost={updatePost}
+        />
       </div>
     </div>
   );
