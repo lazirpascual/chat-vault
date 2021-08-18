@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { Users } from "../../dummyData";
 import Friends from "../friends/Friends";
 import { AuthContext } from "../../context/AuthContext";
 import { getUserFriends } from "../../services/users";
@@ -34,6 +35,7 @@ const sidebarItems = [
 const Sidebar = () => {
   const [friends, setFriends] = useState([]);
   const { user } = useContext(AuthContext);
+  const users = friends.length > 0 ? friends : Users;
 
   useEffect(() => {
     const getFriends = async () => {
@@ -60,9 +62,13 @@ const Sidebar = () => {
         </ul>
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
-        <h3 className="sidebarTitle">Friends ({friends.length})</h3>
+        <h3 className="sidebarTitle">
+          {friends.length > 0
+            ? `Friends (${friends.length})`
+            : `Recommended Friends`}
+        </h3>
         <ul className="sidebarFriendList">
-          {friends.map((friend) => (
+          {users.map((friend) => (
             <div key={friend.username}>
               <Link
                 to={`/profile/${friend.username}`}

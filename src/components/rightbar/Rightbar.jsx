@@ -62,6 +62,7 @@ const Rightbar = ({ user }) => {
           <img src={`${PF}cloudcomputers.jpg`} alt="" className="rightbarAd" />
         </a>
         <h3 className="rightbarTitle">Online Friends</h3>
+
         <ul className="rightbarFriendList">
           {Users.map((u) => (
             <Online key={u.id} user={u} />
@@ -102,28 +103,34 @@ const Rightbar = ({ user }) => {
           </div>
         </div>
         <h4 className="rightbarTitle">User friends</h4>
-        <div className="rightbarFollowings">
-          {friends.map((friend) => (
-            <Link
-              to={`/profile/${friend.username}`}
-              style={{ textDecoration: "none", color: "black" }}
-              key={friend.username}
-            >
-              <div className="rightbarFollowing">
-                <img
-                  src={
-                    friend.profilePicture
-                      ? `${PF}${friend.profilePicture}`
-                      : `${PF}person/noAvatar.png`
-                  }
-                  alt=""
-                  className="rightbarFollowingImg"
-                />
-                <span className="rightbarFollowingName">{friend.username}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {friends.length > 0 ? (
+          <div className="rightbarFollowings">
+            {friends.map((friend) => (
+              <Link
+                to={`/profile/${friend.username}`}
+                style={{ textDecoration: "none", color: "black" }}
+                key={friend.username}
+              >
+                <div className="rightbarFollowing">
+                  <img
+                    src={
+                      friend.profilePicture
+                        ? `${PF}${friend.profilePicture}`
+                        : `${PF}person/noAvatar.png`
+                    }
+                    alt=""
+                    className="rightbarFollowingImg"
+                  />
+                  <span className="rightbarFollowingName">
+                    {friend.username}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div>This user is currently not following anyone.</div>
+        )}
       </>
     );
   };
