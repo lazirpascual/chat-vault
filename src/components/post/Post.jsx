@@ -8,6 +8,7 @@ import { likeDislikePost, updatePostService } from "../../services/posts";
 import Highlighter from "react-highlight-words";
 import { TextField, IconButton } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
+import Comment from "../comment/Comment";
 import "./post.css";
 
 const Post = ({ post, search, deletePost, updatePost }) => {
@@ -144,6 +145,8 @@ const Post = ({ post, search, deletePost, updatePost }) => {
             </span>
           </div>
         </div>
+        <hr className="postHr" />
+        <Comment currentUser={currentUser} />
       </div>
     </div>
   );
