@@ -12,7 +12,7 @@ import "./modifyPost.css";
 
 const ModifyPost = ({ userId, post, deletePost, handleEditClick }) => {
   const handleDelete = async () => {
-    if (window.confirm("Remove This Post?")) {
+    if (window.confirm("Are you sure you want to remove this post?")) {
       try {
         await removePost(post._id, userId);
         deletePost(post._id);

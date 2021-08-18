@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { updatePostService } from "../../services/posts";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import { IconButton } from "@material-ui/core";
+import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import Popover from "@material-ui/core/Popover";
 import "./comment.css";
+import uuid from "uuid/dist/v1";
 
 const Comment = ({
   currentUser,
@@ -30,8 +36,8 @@ const Comment = ({
         console.log(error);
       }
     };
-    // update post so it contains new comment only when comments state changes
-    prevComments < comments && updateComment();
+    // update post so it contains new comment only when adding/deleting comments
+    (prevComments < comments || prevComments > comments) && updateComment();
   }, [comments, post, prevComments, updatePost]);
 
   const addComment = async (event) => {
@@ -41,10 +47,17 @@ const Comment = ({
       desc: userComment,
       name: currentUser.username,
       picture: currentUser.profilePicture,
+      id: uuid(),
     };
     setComments([...comments, newComment]);
     setViewComments(true);
     setUserComment("");
+  };
+
+  const deleteComment = (commentId) => {
+    if (window.confirm("Are you sure you want to remove this comment?")) {
+      setComments(comments.filter((comment) => comment.id !== commentId));
+    }
   };
 
   return (
@@ -84,6 +97,34 @@ const Comment = ({
               <p className="commentBodyName">{comment.name}</p>
               <p>{comment.desc}</p>
             </div>
+            {currentUser.username === comment.name && (
+              <PopupState variant="popover" popupId="demo-popup-popover">
+                {(popupState) => (
+                  <div>
+                    <IconButton {...bindTrigger(popupState)}>
+                      <MoreHorizIcon className="commentBodyIcon" />
+                    </IconButton>
+                    <Popover
+                      {...bindPopover(popupState)}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "center",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                      }}
+                    >
+                      <div className="modifyPostContainer">
+                        <IconButton onClick={() => deleteComment(comment.id)}>
+                          <DeleteForeverIcon />
+                        </IconButton>
+                      </div>
+                    </Popover>
+                  </div>
+                )}
+              </PopupState>
+            )}
           </div>
         ))}
     </>

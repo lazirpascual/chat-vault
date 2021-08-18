@@ -20,7 +20,8 @@ This is a fullstack MERN application that models a social media website. Include
 
 - User registration/login authenticated through JSON Web Token
 - Realtime Chat with authenticated users implemented using Socket.IO
-- Create, delete, update, like/dislike a post in the home page or profile page
+- Create, delete, update a post in the home page or profile page
+- Like/dislike and add/delete comments for each post
 - Follow or unfollow a user to view their content
 - Search for a user's profile or a user's post
 - Keep track of a user's information (friends, posts, hometown, etc.) by navigating to their profile page

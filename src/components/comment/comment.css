@@ -10,7 +10,7 @@
 .commentInput {
   width: 92%;
   font-size: 16px;
-  padding: 5px 15px;
+  padding: 10px 15px;
   margin-left: 10px;
   border-radius: 20px;
   border-style: none;
@@ -37,4 +37,9 @@
 
 .commentBodyName {
   font-weight: 500;
+}
+
+.commentBodyIcon {
+  color: rgb(112, 111, 111);
+  cursor: pointer;
 }
