@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import { useParams } from "react-router";
 import { getUserByName } from "../../services/users";
+import { Button } from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
+import { AuthContext } from "../../context/AuthContext";
 import "./profile.css";
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user, setUser] = useState({});
   const { username } = useParams(); // fetches username params we defined in our profile react route
+  const { user: currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -47,9 +51,21 @@ export default function Profile() {
                 alt="Profile"
               />
             </div>
-            <div className="profileInfo">
-              <h4 className="profileInfoName">{user.username}</h4>
-              <span className="profileInfoDesc">{user.desc}</span>
+            <div className="profileInfoContainer">
+              <div className="profileInfo">
+                <h4 className="profileInfoName">{user.username}</h4>
+                <span className="profileInfoDesc">{user.desc}</span>
+              </div>
+              {currentUser.username === username && (
+                <Button
+                  className="profileInfoButton"
+                  style={{ width: "15%" }}
+                  variant="contained"
+                >
+                  <EditIcon />
+                  Edit Profile
+                </Button>
+              )}
             </div>
           </div>
           <div className="profileRightBottom">
