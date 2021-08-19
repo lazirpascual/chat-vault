@@ -58,7 +58,7 @@ const Register = () => {
           Please wait until the API is fetched from Heroku...
           <CircularProgress
             className="loginLoadingAnimation"
-            color="white"
+            color="inherit"
             size="20px"
           />
         </div>

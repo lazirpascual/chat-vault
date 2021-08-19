@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { updateUser } from "../../services/users";
+import { uploadPhoto } from "../../services/posts";
 import Notification from "../notification/Notification";
 import { Button, TextField } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
@@ -13,6 +14,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import { Cancel } from "@material-ui/icons";
 import { useTheme } from "@material-ui/core/styles";
 import "./editProfile.css";
 
@@ -29,28 +31,46 @@ const EditProfile = ({ user, setUser }) => {
   );
   const [openNotification, setOpenNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
 
   const updateProfile = async (event) => {
-    event.preventDefault();
-    setOpen(false);
-    const updatedUser = {
-      ...user,
-      desc: bio,
-      city: currentCity,
-      from: hometown,
-      relationship: relationshipStatus,
-    };
-    try {
-      const responseSuccess = await updateUser(updatedUser);
-      responseSuccess && setUser(updatedUser);
-      setNotificationMessage(
-        `${responseSuccess}. Too see changes, please re-login to your account.`
-      );
-      setOpenNotification(true);
-    } catch (error) {
-      console.log(error);
+    if (window.confirm("Are you sure you want to make these changes?")) {
+      event.preventDefault();
+      setOpen(false);
+      const updatedUser = {
+        ...user,
+        desc: bio,
+        city: currentCity,
+        from: hometown,
+        relationship: relationshipStatus,
+      };
+      if (profilePicture) {
+        const data = new FormData();
+        const fileName = Date.now() + profilePicture.name;
+        data.append("name", fileName);
+        data.append("file", profilePicture);
+        updatedUser.profilePicture = fileName;
+        try {
+          await uploadPhoto(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      try {
+        const responseSuccess = await updateUser(updatedUser);
+        responseSuccess && setUser(updatedUser);
+        setProfilePicture(null);
+        setNotificationMessage(
+          `${responseSuccess}. Too verify changes, please re-login to your account.`
+        );
+        setOpenNotification(true);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
+
+  console.log(user);
 
   return (
     <>
@@ -79,15 +99,39 @@ const EditProfile = ({ user, setUser }) => {
       >
         <DialogTitle id="responsive-dialog-title">Profile Picture</DialogTitle>
         <DialogContent className="editProfilePictureContainer">
-          <img
-            src={
-              user?.profilePicture
-                ? `${PF}${user?.profilePicture}`
-                : `${PF}person/noAvatar.png`
-            }
-            alt=""
-            className="editProfilePicture"
-          />
+          {profilePicture && (
+            <div className="cancelProfilePicture">
+              <img
+                src={URL.createObjectURL(profilePicture)}
+                alt=""
+                className="editProfilePicture"
+              />
+              <Cancel
+                className="shareCancel"
+                onClick={() => setProfilePicture(null)}
+              />
+            </div>
+          )}
+          <label htmlFor="profilePicture">
+            {!profilePicture && (
+              <img
+                src={
+                  user?.profilePicture
+                    ? `${PF}${user?.profilePicture}`
+                    : `${PF}person/noAvatar.png`
+                }
+                alt="Profile"
+                className="editProfilePicture"
+              />
+            )}
+            <input
+              style={{ display: "none" }}
+              type="file"
+              id="profilePicture"
+              accept=".png, .jpg, .jpeg"
+              onChange={(e) => setProfilePicture(e.target.files[0])}
+            />
+          </label>
         </DialogContent>
         <DialogTitle id="responsive-dialog-title">Cover Photo</DialogTitle>
         <DialogContent className="editProfilePictureContainer">
@@ -104,11 +148,11 @@ const EditProfile = ({ user, setUser }) => {
         <DialogTitle id="responsive-dialog-title">Bio</DialogTitle>
         <DialogContent>
           <TextField
-            variant="outlined"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
             fullWidth
-            multiline={4}
+            multiline={true}
+            rows={2}
           />
         </DialogContent>
         <DialogTitle id="responsive-dialog-title">

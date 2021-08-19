@@ -2,6 +2,10 @@
   height: 45px;
 }
 
+.cancelProfilePicture {
+  position: relative;
+}
+
 .editProfilePictureContainer {
   display: flex;
   justify-content: center;
@@ -12,12 +16,14 @@
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .editCoverPicture {
   width: 95%;
   height: 300px;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .editProfileTextFields {

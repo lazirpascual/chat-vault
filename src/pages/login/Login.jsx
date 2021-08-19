@@ -41,7 +41,7 @@ export default function Login() {
       />
       {isFetching && (
         <div className="loginLoadingMessage">
-          Please wait until the API is fetched from Heroku...
+          Please wait until the API is fetched and the site loads
           <CircularProgress
             className="loginLoadingAnimation"
             color="white"
