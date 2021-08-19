@@ -39,6 +39,16 @@ export default function Login() {
         setOpen={setOpenNotification}
         type="error"
       />
+      {isFetching && (
+        <div className="loginLoadingMessage">
+          Please wait until the API is fetched from Heroku...
+          <CircularProgress
+            className="loginLoadingAnimation"
+            color="white"
+            size="20px"
+          />
+        </div>
+      )}
       <div className="loginWrapper">
         <div className="loginLeft">
           <h3 className="loginLogo">Chat Vault</h3>
@@ -65,7 +75,7 @@ export default function Login() {
             />
             <button className="loginButton" type="submit" disabled={isFetching}>
               {isFetching ? (
-                <CircularProgress color="white" size="20px" />
+                <CircularProgress color="inherit" size="20px" />
               ) : (
                 "Log In"
               )}

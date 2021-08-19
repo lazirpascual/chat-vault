@@ -7,6 +7,19 @@
   justify-content: center;
 }
 
+.loginLoadingMessage {
+  position: fixed;
+  top: 0;
+  margin-top: 25px;
+  font-size: 28px;
+  font-weight: 500;
+  color: rgb(75, 74, 74);
+}
+
+.loginLoadingAnimation {
+  margin-left: 15px;
+}
+
 .loginWrapper {
   width: 70%;
   height: 70%;

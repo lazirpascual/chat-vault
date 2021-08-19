@@ -3,10 +3,11 @@ import { loginCall, registerCall } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router";
 import Notification from "../../components/notification/Notification";
+import { CircularProgress } from "@material-ui/core";
 import "./register.css";
 
 const Register = () => {
-  const { dispatch } = useContext(AuthContext);
+  const { isFetching, dispatch } = useContext(AuthContext);
   const username = useRef();
   const email = useRef();
   const password = useRef();
@@ -52,6 +53,16 @@ const Register = () => {
         setOpen={setOpenNotification}
         type="error"
       />
+      {isFetching && (
+        <div className="loginLoadingMessage">
+          Please wait until the API is fetched from Heroku...
+          <CircularProgress
+            className="loginLoadingAnimation"
+            color="white"
+            size="20px"
+          />
+        </div>
+      )}
       <div className="loginWrapper">
         <div className="loginLeft">
           <h3 className="loginLogo">Chat Vault</h3>
@@ -95,8 +106,16 @@ const Register = () => {
             >
               Already have an account? Log in
             </span>
-            <button type="submit" className="loginRegisterButton">
-              Sign Up
+            <button
+              type="submit"
+              className="loginRegisterButton"
+              disabled={isFetching}
+            >
+              {isFetching ? (
+                <CircularProgress color="inherit" size="20px" />
+              ) : (
+                "Sign Up"
+              )}
             </button>
           </form>
         </div>
