@@ -74,6 +74,7 @@ const EditProfile = ({ user, setUser }) => {
         onClose={() => setOpen(false)}
         fullScreen={fullScreen}
         maxWidth="md"
+        fullWidth
         className="editProfileDialogContainer"
       >
         <DialogTitle id="responsive-dialog-title">Profile Picture</DialogTitle>

@@ -119,7 +119,9 @@ const Post = ({ post, search, deletePost, updatePost }) => {
               </>
             )}
           </span>
-          <img src={PF + post.img} alt="Post" className="postImg" />
+          {post.img && (
+            <img src={PF + post.img} alt="Post" className="postImg" />
+          )}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

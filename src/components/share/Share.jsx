@@ -3,6 +3,7 @@ import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
 import { AuthContext } from "../../context/AuthContext";
 import { Cancel } from "@material-ui/icons";
 import { uploadPhoto, createPost } from "../../services/posts";
+import Notification from "../notification/Notification";
 import "./share.css";
 
 const shareItems = [
@@ -24,8 +25,9 @@ const Share = ({ addPost }) => {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [desc, setDesc] = useState("");
-  //const desc = useRef();
   const [file, setFile] = useState(null);
+  const [openNotification, setOpenNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,18 +47,29 @@ const Share = ({ addPost }) => {
         console.log(error);
       }
     }
-    try {
-      const response = await createPost(newPost);
-      addPost(response);
-      setFile(null);
-      setDesc("");
-    } catch (error) {
-      console.log(error);
+    if (desc) {
+      try {
+        const response = await createPost(newPost);
+        addPost(response);
+        setFile(null);
+        setDesc("");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setOpenNotification(true);
+      setNotificationMessage(`The post must contain a description.`);
     }
   };
 
   return (
     <div className="share">
+      <Notification
+        message={notificationMessage}
+        open={openNotification}
+        setOpen={setOpenNotification}
+        type="error"
+      />
       <div className="shareWrapper">
         <div className="shareTop">
           <img
@@ -73,6 +86,7 @@ const Share = ({ addPost }) => {
             placeholder={`What's on your mind, ${user.username}?`}
             className="shareInput"
             onChange={(e) => setDesc(e.target.value)}
+            required
           />
         </div>
         <hr className="shareHr" />
