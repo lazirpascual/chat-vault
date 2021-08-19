@@ -19,7 +19,7 @@
 }
 
 .chatBox {
-  flex: 6.5;
+  flex: 6;
 }
 
 .chatBoxWrapper {
@@ -69,7 +69,7 @@
 }
 
 .chatOnline {
-  flex: 2;
+  flex: 2.5;
 }
 
 .chatMenuWrapper,

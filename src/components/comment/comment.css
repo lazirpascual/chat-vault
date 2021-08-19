@@ -9,7 +9,7 @@
 
 .commentInput {
   width: 92%;
-  font-size: 16px;
+  font-size: 18px;
   padding: 10px 15px;
   margin-left: 10px;
   border-radius: 20px;
@@ -37,6 +37,10 @@
 
 .commentBodyName {
   font-weight: 500;
+}
+
+.commentBodyName:hover {
+  text-decoration: underline;
 }
 
 .commentBodyIcon {

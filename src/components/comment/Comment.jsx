@@ -5,8 +5,10 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { IconButton } from "@material-ui/core";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import Popover from "@material-ui/core/Popover";
-import "./comment.css";
+
 import uuid from "uuid/dist/v1";
+import { Link } from "react-router-dom";
+import "./comment.css";
 
 const Comment = ({
   currentUser,
@@ -84,17 +86,27 @@ const Comment = ({
       {viewComments &&
         comments.map((comment, index) => (
           <div className="userCommentContainer" key={index}>
-            <img
-              src={
-                comment.picture
-                  ? PF + comment.picture
-                  : PF + "person/noAvatar.png"
-              }
-              alt="Profile"
-              className="postProfileImg"
-            />
+            <Link
+              to={`/profile/${comment.name}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <img
+                src={
+                  comment.picture
+                    ? PF + comment.picture
+                    : PF + "person/noAvatar.png"
+                }
+                alt="Profile"
+                className="postProfileImg"
+              />
+            </Link>
             <div className="commentBody">
-              <p className="commentBodyName">{comment.name}</p>
+              <Link
+                to={`/profile/${comment.name}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <p className="commentBodyName">{comment.name}</p>{" "}
+              </Link>
               <p>{comment.desc}</p>
             </div>
             {currentUser.username === comment.name && (

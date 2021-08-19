@@ -52,7 +52,13 @@ export default function Profile() {
               />
             </div>
             <div className="profileInfoContainer">
-              <div className="profileInfo">
+              <div
+                className={
+                  currentUser.username === username
+                    ? "profileInfoCurrentUser"
+                    : "profileInfo"
+                }
+              >
                 <h4 className="profileInfoName">{user.username}</h4>
                 <span className="profileInfoDesc">{user.desc}</span>
               </div>
@@ -63,7 +69,7 @@ export default function Profile() {
                   variant="contained"
                 >
                   <EditIcon />
-                  Edit Profile
+                  <span style={{ marginLeft: 10 }}>Edit Profile</span>
                 </Button>
               )}
             </div>

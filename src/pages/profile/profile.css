@@ -36,8 +36,16 @@
 }
 
 .profileInfo {
-  width: 67%;
-  margin-left: 185px;
+  width: 66%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileInfoCurrentUser {
+  width: 66%;
+  margin-left: 195px;
   display: flex;
   flex-direction: column;
   align-items: center;
