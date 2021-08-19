@@ -32,6 +32,24 @@ const EditProfile = ({ user, setUser }) => {
   const [openNotification, setOpenNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
+  const [coverPicture, setCoverPicture] = useState(null);
+
+  const uploadPicture = async (filePicture, userToUpdate) => {
+    const data = new FormData();
+    const fileName = Date.now() + filePicture.name;
+    data.append("name", fileName);
+    data.append("file", filePicture);
+    if (filePicture === profilePicture) {
+      userToUpdate.profilePicture = fileName;
+    } else {
+      userToUpdate.coverPicture = fileName;
+    }
+    try {
+      await uploadPhoto(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const updateProfile = async (event) => {
     if (window.confirm("Are you sure you want to make these changes?")) {
@@ -45,23 +63,18 @@ const EditProfile = ({ user, setUser }) => {
         relationship: relationshipStatus,
       };
       if (profilePicture) {
-        const data = new FormData();
-        const fileName = Date.now() + profilePicture.name;
-        data.append("name", fileName);
-        data.append("file", profilePicture);
-        updatedUser.profilePicture = fileName;
-        try {
-          await uploadPhoto(data);
-        } catch (error) {
-          console.log(error);
-        }
+        uploadPicture(profilePicture, updatedUser);
+      }
+      if (coverPicture) {
+        uploadPicture(coverPicture, updatedUser);
       }
       try {
         const responseSuccess = await updateUser(updatedUser);
         responseSuccess && setUser(updatedUser);
         setProfilePicture(null);
+        setCoverPicture(null);
         setNotificationMessage(
-          `${responseSuccess}. Too verify changes, please re-login to your account.`
+          `${responseSuccess}. To verify changes, please re-login to your account.`
         );
         setOpenNotification(true);
       } catch (error) {
@@ -69,8 +82,6 @@ const EditProfile = ({ user, setUser }) => {
       }
     }
   };
-
-  console.log(user);
 
   return (
     <>
@@ -135,15 +146,39 @@ const EditProfile = ({ user, setUser }) => {
         </DialogContent>
         <DialogTitle id="responsive-dialog-title">Cover Photo</DialogTitle>
         <DialogContent className="editProfilePictureContainer">
-          <img
-            src={
-              user?.coverPicture
-                ? `${PF}${user?.coverPicture}`
-                : `${PF}person/noCover.png`
-            }
-            alt=""
-            className="editCoverPicture"
-          />
+          {coverPicture && (
+            <div className="cancelProfilePicture">
+              <img
+                src={URL.createObjectURL(coverPicture)}
+                alt=""
+                className="editCoverPicture"
+              />
+              <Cancel
+                className="shareCancel"
+                onClick={() => setCoverPicture(null)}
+              />
+            </div>
+          )}
+          <label htmlFor="coverPicture">
+            {!coverPicture && (
+              <img
+                src={
+                  user?.coverPicture
+                    ? `${PF}${user?.coverPicture}`
+                    : `${PF}person/noCover.png`
+                }
+                alt="Cover"
+                className="editCoverPicture"
+              />
+            )}
+            <input
+              style={{ display: "none" }}
+              type="file"
+              id="coverPicture"
+              accept=".png, .jpg, .jpeg"
+              onChange={(e) => setCoverPicture(e.target.files[0])}
+            />
+          </label>
         </DialogContent>
         <DialogTitle id="responsive-dialog-title">Bio</DialogTitle>
         <DialogContent>

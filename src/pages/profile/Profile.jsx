@@ -49,21 +49,15 @@ export default function Profile() {
                 }
                 alt="Profile"
               />
-            </div>
-            <div className="profileInfoContainer">
-              <div
-                className={
-                  currentUser.username === username
-                    ? "profileInfoCurrentUser"
-                    : "profileInfo"
-                }
-              >
-                <h4 className="profileInfoName">{user.username}</h4>
-                <span className="profileInfoDesc">{user.desc}</span>
-              </div>
               {currentUser.username === username && (
-                <EditProfile user={currentUser} setUser={setUser} />
+                <div className="editProfileContainer">
+                  <EditProfile user={currentUser} setUser={setUser} />
+                </div>
               )}
+            </div>
+            <div className="profileInfo">
+              <h4 className="profileInfoName">{user.username}</h4>
+              <span className="profileInfoDesc">{user.desc}</span>
             </div>
           </div>
           <div className="profileRightBottom">

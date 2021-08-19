@@ -86,9 +86,11 @@
 }
 
 .shareCancel {
+  color: grey;
+  border: rgb(253, 253, 253) 2px solid;
+  border-radius: 50%;
   position: absolute;
   top: 0;
   right: 20px;
   cursor: pointer;
-  opacity: 0.7;
 }
