@@ -8,10 +8,25 @@
 }
 
 .chatMenuHeading {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   margin-top: 20px;
   margin-left: 25px;
   font-size: 28px;
   font-weight: 600;
+}
+
+.addConversationIcon {
+  margin-left: auto !important;
+  margin-right: 35px;
+  font-size: 40px !important;
+  cursor: pointer;
+}
+
+.addConversationIcon:hover {
+  background-color: rgb(228, 226, 226);
+  border-radius: 5px;
 }
 
 .chatMenuInput {
@@ -98,6 +113,7 @@
 }
 
 .noConversationText {
+  margin-left: 50px;
   position: absolute;
   top: 10%;
   font-size: 50px;

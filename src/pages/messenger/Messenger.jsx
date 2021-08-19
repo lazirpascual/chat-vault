@@ -9,6 +9,7 @@ import { getAllConversations } from "../../services/conversations";
 import { getUserMessages, createMessage } from "../../services/messages";
 import Divider from "@material-ui/core/Divider";
 import { Search } from "@material-ui/icons";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import "./messenger.css";
 import { TextField } from "@material-ui/core";
 
@@ -115,7 +116,13 @@ const Messenger = () => {
       <Topbar />
       <div className="messenger">
         <div className="chatMenu">
-          <div className="chatMenuHeading">Chats</div>
+          <div className="chatMenuHeading">
+            <span>Chats</span>
+            <PersonAddIcon
+              className="addConversationIcon"
+              style={{ size: 40 }}
+            />
+          </div>
           <div className="chatMenuWrapper">
             <div>
               <TextField
@@ -143,7 +150,6 @@ const Messenger = () => {
                 <div className="chatBoxHeading">
                   <Conversation conversation={currentChat} currentUser={user} />
                 </div>
-
                 <div className="chatBoxTop">
                   {messages.map((m) => (
                     <div key={m._id} ref={scrollRef}>

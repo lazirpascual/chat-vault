@@ -69,14 +69,16 @@ const EditProfile = ({ user, setUser }) => {
         uploadPicture(coverPicture, updatedUser);
       }
       try {
-        const responseSuccess = await updateUser(updatedUser);
-        responseSuccess && setUser(updatedUser);
-        setProfilePicture(null);
-        setCoverPicture(null);
-        setNotificationMessage(
-          `${responseSuccess}. To verify changes, please re-login to your account.`
-        );
-        setOpenNotification(true);
+        if (updatedUser !== user) {
+          const responseSuccess = await updateUser(updatedUser);
+          responseSuccess && setUser(updatedUser);
+          setProfilePicture(null);
+          setCoverPicture(null);
+          setNotificationMessage(
+            `${responseSuccess}. To verify changes, please re-login to your account.`
+          );
+          setOpenNotification(true);
+        }
       } catch (error) {
         console.log(error);
       }
