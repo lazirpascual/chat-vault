@@ -1,7 +1,8 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useState } from "react";
 import { loginCall, registerCall } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router";
+import Notification from "../../components/notification/Notification";
 import "./register.css";
 
 const Register = () => {
@@ -11,6 +12,8 @@ const Register = () => {
   const password = useRef();
   const passwordAgain = useRef();
   const history = useHistory();
+  const [openNotification, setOpenNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,12 +38,20 @@ const Register = () => {
         }
       } catch (error) {
         console.log(error);
+        setNotificationMessage(`Unable to register. Please try Again.`);
+        setOpenNotification(true);
       }
     }
   };
 
   return (
     <div className="login">
+      <Notification
+        message={notificationMessage}
+        open={openNotification}
+        setOpen={setOpenNotification}
+        type="error"
+      />
       <div className="loginWrapper">
         <div className="loginLeft">
           <h3 className="loginLogo">Chat Vault</h3>
