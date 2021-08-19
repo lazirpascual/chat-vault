@@ -7,7 +7,10 @@ import { AuthContext } from "../../context/AuthContext";
 import { io } from "socket.io-client";
 import { getAllConversations } from "../../services/conversations";
 import { getUserMessages, createMessage } from "../../services/messages";
+import Divider from "@material-ui/core/Divider";
+import { Search } from "@material-ui/icons";
 import "./messenger.css";
+import { TextField } from "@material-ui/core";
 
 const Messenger = () => {
   const { user } = useContext(AuthContext);
@@ -112,8 +115,19 @@ const Messenger = () => {
       <Topbar />
       <div className="messenger">
         <div className="chatMenu">
+          <div className="chatMenuHeading">Chats</div>
           <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
+            <div>
+              <TextField
+                placeholder="Search for friends"
+                className="chatMenuInput"
+                InputProps={{
+                  startAdornment: (
+                    <Search style={{ marginRight: 10, marginLeft: 5 }} />
+                  ),
+                }}
+              />
+            </div>
             {conversations.map((c) => (
               <div key={c._id} onClick={() => setCurrentChat(c)}>
                 <Conversation conversation={c} currentUser={user} />
@@ -121,10 +135,15 @@ const Messenger = () => {
             ))}
           </div>
         </div>
+        <Divider orientation="vertical" />
         <div className="chatBox">
           <div className="chatBoxWrapper">
             {currentChat ? (
               <>
+                <div className="chatBoxHeading">
+                  <Conversation conversation={currentChat} currentUser={user} />
+                </div>
+
                 <div className="chatBoxTop">
                   {messages.map((m) => (
                     <div key={m._id} ref={scrollRef}>

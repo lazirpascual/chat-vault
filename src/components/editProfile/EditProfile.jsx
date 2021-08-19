@@ -116,6 +116,7 @@ const EditProfile = ({ user, setUser }) => {
                 src={URL.createObjectURL(profilePicture)}
                 alt=""
                 className="editProfilePicture"
+                style={{ cursor: "default" }}
               />
               <Cancel
                 className="shareCancel"
@@ -152,6 +153,7 @@ const EditProfile = ({ user, setUser }) => {
                 src={URL.createObjectURL(coverPicture)}
                 alt=""
                 className="editCoverPicture"
+                style={{ cursor: "default" }}
               />
               <Cancel
                 className="shareCancel"

@@ -1,17 +1,23 @@
 .messenger {
-  height: calc(100vh - 70px);
+  height: calc(100vh - 130px);
   display: flex;
 }
 
 .chatMenu {
-  flex: 3.5;
+  flex: 3;
+}
+
+.chatMenuHeading {
+  margin-top: 20px;
+  margin-left: 25px;
+  font-size: 28px;
+  font-weight: 600;
 }
 
 .chatMenuInput {
   width: 90%;
-  padding: 10px 0;
-  border: none;
-  border-bottom: 1px solid gray;
+  padding: 25px 15px !important;
+  margin-left: 10px;
 }
 
 .chatMenuInput:focus {
@@ -19,7 +25,18 @@
 }
 
 .chatBox {
-  flex: 6;
+  flex: 6.5;
+}
+
+.chatBoxHeading {
+  margin-left: -10px;
+  display: flex;
+  align-items: center;
+  height: 70px;
+  border-radius: 5px;
+  box-shadow: 1px 6px 7px -7px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 6px 7px -7px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 6px 7px -7px rgba(0, 0, 0, 0.5);
 }
 
 .chatBoxWrapper {
@@ -43,6 +60,7 @@
 }
 
 .chatMessageInput {
+  margin-top: 20px;
   font-size: 18px;
   width: 80%;
   height: 40px;
