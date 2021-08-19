@@ -9,9 +9,9 @@ import { getAllConversations } from "../../services/conversations";
 import { getUserMessages, createMessage } from "../../services/messages";
 import Divider from "@material-ui/core/Divider";
 import { Search } from "@material-ui/icons";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import "./messenger.css";
 import { TextField } from "@material-ui/core";
+import AddConversation from "../../components/addConversation/AddConversation";
+import "./messenger.css";
 
 const Messenger = () => {
   const { user } = useContext(AuthContext);
@@ -118,9 +118,10 @@ const Messenger = () => {
         <div className="chatMenu">
           <div className="chatMenuHeading">
             <span>Chats</span>
-            <PersonAddIcon
-              className="addConversationIcon"
-              style={{ size: 40 }}
+            <AddConversation
+              conversations={conversations}
+              setConversations={setConversations}
+              setCurrentChat={setCurrentChat}
             />
           </div>
           <div className="chatMenuWrapper">

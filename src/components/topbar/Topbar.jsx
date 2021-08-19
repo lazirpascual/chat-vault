@@ -1,10 +1,10 @@
 import React, { useContext, useRef, useEffect } from "react";
-import "./topbar.css";
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { LogoutCall } from "../../context/AuthActions";
 import { useHistory } from "react-router";
+import "./topbar.css";
 
 const Topbar = ({ setSearchTerm }) => {
   const { user, dispatch } = useContext(AuthContext);

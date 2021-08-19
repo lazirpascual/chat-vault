@@ -1,0 +1,15 @@
+.addConversationContainer {
+  margin-left: auto;
+  margin-right: 6%;
+}
+
+.addConversationIcon {
+  width: 50px !important;
+  font-size: 40px !important;
+  color: rgb(56, 56, 56);
+}
+
+.addConversationMenuSearch {
+  width: 80%;
+  padding: 20px !important;
+}

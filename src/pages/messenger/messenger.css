@@ -1,5 +1,5 @@
 .messenger {
-  height: calc(100vh - 130px);
+  height: calc(100vh - 160px);
   display: flex;
 }
 
@@ -15,18 +15,6 @@
   margin-left: 25px;
   font-size: 28px;
   font-weight: 600;
-}
-
-.addConversationIcon {
-  margin-left: auto !important;
-  margin-right: 35px;
-  font-size: 40px !important;
-  cursor: pointer;
-}
-
-.addConversationIcon:hover {
-  background-color: rgb(228, 226, 226);
-  border-radius: 5px;
 }
 
 .chatMenuInput {
