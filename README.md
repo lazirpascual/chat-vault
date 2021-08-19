@@ -24,7 +24,7 @@ This is a fullstack MERN application that models a social media website. Include
 - Like/dislike and add/delete comments for each post
 - Follow or unfollow a user to view their content
 - Search for a user's profile or a user's post
-- Keep track of a user's information (friends, posts, hometown, etc.) by navigating to their profile page
+- Update personal information (bio, city, status, etc.) and change or upload profile/cover pictures
 
 # Development Process
 

@@ -5,10 +5,9 @@ import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import { useParams } from "react-router";
 import { getUserByName } from "../../services/users";
-import { Button } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
 import { AuthContext } from "../../context/AuthContext";
 import "./profile.css";
+import EditProfile from "../../components/editProfile/EditProfile";
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -62,16 +61,7 @@ export default function Profile() {
                 <h4 className="profileInfoName">{user.username}</h4>
                 <span className="profileInfoDesc">{user.desc}</span>
               </div>
-              {currentUser.username === username && (
-                <Button
-                  className="profileInfoButton"
-                  style={{ width: "15%" }}
-                  variant="contained"
-                >
-                  <EditIcon />
-                  <span style={{ marginLeft: 10 }}>Edit Profile</span>
-                </Button>
-              )}
+              {currentUser.username === username && <EditProfile />}
             </div>
           </div>
           <div className="profileRightBottom">

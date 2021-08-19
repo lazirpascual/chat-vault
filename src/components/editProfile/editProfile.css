@@ -1,0 +1,25 @@
+.profileInfoButton {
+  height: 45px;
+}
+
+.editProfilePictureContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.editProfilePicture {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.editCoverPicture {
+  width: 95%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.editRelationshipStatus {
+  margin-bottom: 10px !important;
+}
