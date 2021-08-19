@@ -11,16 +11,14 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
 import { useTheme } from "@material-ui/core/styles";
-import { AuthContext } from "../../context/AuthContext";
+import { updateUser } from "../../services/users";
 import "./editProfile.css";
 
-const EditProfile = () => {
+const EditProfile = ({ user, setUser }) => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [bio, setBio] = useState(user.desc);
   const [currentCity, setCurrentCity] = useState(user.city);
@@ -29,12 +27,23 @@ const EditProfile = () => {
     user.relationship
   );
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  console.log(user);
 
-  const handleClose = () => {
+  const updateProfile = async (event) => {
+    event.preventDefault();
     setOpen(false);
+    const updatedUser = {
+      ...user,
+      desc: bio,
+      city: currentCity,
+      relationship: relationshipStatus,
+    };
+    try {
+      await updateUser(updatedUser);
+      setUser(updatedUser);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -43,14 +52,14 @@ const EditProfile = () => {
         className="profileInfoButton"
         style={{ width: "15%" }}
         variant="contained"
-        onClick={handleClickOpen}
+        onClick={() => setOpen(true)}
       >
         <EditIcon />
         <span style={{ marginLeft: 10 }}>Edit Profile</span>
       </Button>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         fullScreen={fullScreen}
         aria-labelledby="draggable-dialog-title"
       >
@@ -120,10 +129,10 @@ const EditProfile = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button autoFocus onClick={() => setOpen(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={updateProfile} color="primary">
             Submit
           </Button>
         </DialogActions>

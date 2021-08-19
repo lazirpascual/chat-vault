@@ -61,7 +61,9 @@ export default function Profile() {
                 <h4 className="profileInfoName">{user.username}</h4>
                 <span className="profileInfoDesc">{user.desc}</span>
               </div>
-              {currentUser.username === username && <EditProfile />}
+              {currentUser.username === username && (
+                <EditProfile user={currentUser} setUser={setUser} />
+              )}
             </div>
           </div>
           <div className="profileRightBottom">
