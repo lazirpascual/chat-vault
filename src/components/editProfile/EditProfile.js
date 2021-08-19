@@ -1,4 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+import { updateUser } from "../../services/users";
+import Notification from "../notification/Notification";
 import { Button, TextField } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import Dialog from "@material-ui/core/Dialog";
@@ -12,7 +14,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { useTheme } from "@material-ui/core/styles";
-import { updateUser } from "../../services/users";
 import "./editProfile.css";
 
 const EditProfile = ({ user, setUser }) => {
@@ -26,8 +27,8 @@ const EditProfile = ({ user, setUser }) => {
   const [relationshipStatus, setRelationshipStatus] = useState(
     user.relationship
   );
-
-  console.log(user);
+  const [openNotification, setOpenNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
 
   const updateProfile = async (event) => {
     event.preventDefault();
@@ -36,11 +37,16 @@ const EditProfile = ({ user, setUser }) => {
       ...user,
       desc: bio,
       city: currentCity,
+      from: hometown,
       relationship: relationshipStatus,
     };
     try {
-      await updateUser(updatedUser);
-      setUser(updatedUser);
+      const responseSuccess = await updateUser(updatedUser);
+      responseSuccess && setUser(updatedUser);
+      setNotificationMessage(
+        `${responseSuccess}. Too see changes, please re-login to your account.`
+      );
+      setOpenNotification(true);
     } catch (error) {
       console.log(error);
     }
@@ -48,6 +54,12 @@ const EditProfile = ({ user, setUser }) => {
 
   return (
     <>
+      <Notification
+        message={notificationMessage}
+        open={openNotification}
+        setOpen={setOpenNotification}
+        type="success"
+      />
       <Button
         className="profileInfoButton"
         style={{ width: "15%" }}
@@ -61,7 +73,8 @@ const EditProfile = ({ user, setUser }) => {
         open={open}
         onClose={() => setOpen(false)}
         fullScreen={fullScreen}
-        aria-labelledby="draggable-dialog-title"
+        maxWidth="md"
+        className="editProfileDialogContainer"
       >
         <DialogTitle id="responsive-dialog-title">Profile Picture</DialogTitle>
         <DialogContent className="editProfilePictureContainer">
@@ -90,6 +103,7 @@ const EditProfile = ({ user, setUser }) => {
         <DialogTitle id="responsive-dialog-title">Bio</DialogTitle>
         <DialogContent>
           <TextField
+            variant="outlined"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
             fullWidth
@@ -100,18 +114,16 @@ const EditProfile = ({ user, setUser }) => {
           Personal Information
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText className="editProfileTextFields">
             <TextField
               label="Current City"
               value={currentCity}
               onChange={(e) => setCurrentCity(e.target.value)}
-              fullWidth
             />
             <TextField
               label="Hometown"
               value={hometown}
               onChange={(e) => setHometown(e.target.value)}
-              fullWidth
             />
             <FormControl>
               <InputLabel>Relationship Status</InputLabel>

@@ -20,6 +20,12 @@
   object-fit: cover;
 }
 
+.editProfileTextFields {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+}
+
 .editRelationshipStatus {
   margin-bottom: 10px !important;
 }

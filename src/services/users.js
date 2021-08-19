@@ -1,8 +1,8 @@
 import axios from "axios";
 import { token } from "./auth";
 
-const baseUrl = "https://chatvault.herokuapp.com/api/users";
-//const baseUrl = "/api/users";
+//const baseUrl = "https://chatvault.herokuapp.com/api/users";
+const baseUrl = "/api/users";
 
 export const getAllUsers = async () => {
   const response = await axios.get(baseUrl);
