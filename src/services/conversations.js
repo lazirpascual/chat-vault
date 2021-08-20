@@ -11,6 +11,14 @@ export const createConversation = async (members) => {
   return response.data;
 };
 
+export const deleteConversation = async (conversationId) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.delete(`${baseUrl}/${conversationId}`, config);
+  return response.data;
+};
+
 export const getConversation = async (currentId, userId) => {
   const config = {
     headers: { Authorization: token },

@@ -5,12 +5,16 @@ import Message from "../../components/message/Message";
 import Topbar from "../../components/topbar/Topbar";
 import { AuthContext } from "../../context/AuthContext";
 import { io } from "socket.io-client";
-import { getAllConversations } from "../../services/conversations";
+import {
+  deleteConversation,
+  getAllConversations,
+} from "../../services/conversations";
 import { getUserMessages, createMessage } from "../../services/messages";
 import Divider from "@material-ui/core/Divider";
 import { Search } from "@material-ui/icons";
-import { TextField } from "@material-ui/core";
+import { IconButton, TextField } from "@material-ui/core";
 import AddConversation from "../../components/addConversation/AddConversation";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import "./messenger.css";
 
 const Messenger = () => {
@@ -111,6 +115,19 @@ const Messenger = () => {
     }
   };
 
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this conversation?")) {
+      try {
+        await deleteConversation(currentChat._id);
+        setConversations(
+          conversations.filter((convo) => convo._id !== currentChat._id)
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <>
       <Topbar />
@@ -150,6 +167,12 @@ const Messenger = () => {
               <>
                 <div className="chatBoxHeading">
                   <Conversation conversation={currentChat} currentUser={user} />
+                  <IconButton
+                    className="chatBoxDeleteIcon"
+                    onClick={handleDelete}
+                  >
+                    <DeleteForeverIcon />
+                  </IconButton>
                 </div>
                 <div className="chatBoxTop">
                   {messages.map((m) => (

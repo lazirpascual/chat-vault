@@ -44,7 +44,6 @@ const AddConversation = ({
 
   const startConversation = async (friendId) => {
     setAnchorEl(null);
-
     // check if user is already in a convo with the friend
     const existingUser = conversations.filter((convo) =>
       convo.members.some((m) => m === friendId)
