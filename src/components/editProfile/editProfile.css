@@ -20,9 +20,8 @@
 }
 
 .editCoverPicture {
-  width: 99%;
-  height: 300px;
-  object-fit: cover;
+  width: 650px;
+  height: 350px;
   cursor: pointer;
 }
 
