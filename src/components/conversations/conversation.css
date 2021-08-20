@@ -7,6 +7,16 @@
   height: 40px;
 }
 
+.conversationSelected {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  height: 40px;
+  background-color: rgb(228, 241, 248);
+}
+
 .conversation:hover {
   background-color: rgb(245, 243, 243);
 }

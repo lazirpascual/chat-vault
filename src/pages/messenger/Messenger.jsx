@@ -31,6 +31,11 @@ const Messenger = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
+    // set current chat to first conversation upon initial load
+    conversations.length > 0 && setCurrentChat(conversations[0]);
+  }, [conversations]);
+
+  useEffect(() => {
     socket.current = io("https://chatvault.herokuapp.com");
     // fetch message from socket server
     socket.current.on("getMessage", (data) => {
@@ -160,7 +165,11 @@ const Messenger = () => {
             </div>
             {conversations.map((c) => (
               <div key={c._id} onClick={() => setCurrentChat(c)}>
-                <Conversation conversation={c} currentUser={user} />
+                <Conversation
+                  conversation={c}
+                  currentUser={user}
+                  currentChat={currentChat}
+                />
               </div>
             ))}
           </div>
@@ -184,7 +193,7 @@ const Messenger = () => {
                   </IconButton>
                 </div>
                 <div className="chatBoxTop">
-                  {messages.map((m) => (
+                  {messages?.map((m) => (
                     <div key={m._id} ref={scrollRef}>
                       <Message message={m} own={m.sender === user._id} />
                     </div>
@@ -204,9 +213,11 @@ const Messenger = () => {
                 </form>
               </>
             ) : (
-              <span className="noConversationText">
-                Open a conversation to start a chat
-              </span>
+              <div className="noConversationContainer">
+                <span className="noConversationText">
+                  Open/Create a Conversation to Start a Chat
+                </span>
+              </div>
             )}
           </div>
         </div>

@@ -104,8 +104,13 @@
   padding-top: 20px;
 }
 
+.noConversationContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
 .noConversationText {
-  margin-left: 50px;
   position: absolute;
   top: 10%;
   font-size: 50px;

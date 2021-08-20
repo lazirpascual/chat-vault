@@ -98,7 +98,7 @@ const Rightbar = ({ user }) => {
                 ? "Single"
                 : user.relationship === 2
                 ? "Married"
-                : "-"}
+                : "Complicated"}
             </span>
           </div>
         </div>

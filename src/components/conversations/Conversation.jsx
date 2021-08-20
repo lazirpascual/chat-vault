@@ -3,27 +3,42 @@ import { getUserById } from "../../services/users";
 import { Link } from "react-router-dom";
 import "./conversation.css";
 
-const Conversation = ({ conversation, currentUser, linkToProfile }) => {
+const Conversation = ({
+  conversation,
+  currentUser,
+  linkToProfile,
+  currentChat,
+}) => {
   const [user, setUser] = useState(null);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const currentConvoFriendId = conversation.members.find(
+    (m) => m !== currentUser._id
+  );
+  const currentChatFriendId = currentChat?.members.find(
+    (m) => m !== currentUser._id
+  );
 
   useEffect(() => {
-    const friendId = conversation.members.find((m) => m !== currentUser._id);
-
     const getUser = async () => {
       try {
-        const friend = await getUserById(friendId);
+        const friend = await getUserById(currentConvoFriendId);
         setUser(friend);
       } catch (error) {
         console.log(error);
       }
     };
     getUser();
-  }, [currentUser, conversation]);
+  }, [currentUser, conversation, currentConvoFriendId]);
 
-  const ConversationBody = (params) => {
+  const ConversationBody = () => {
     return (
-      <div className="conversation">
+      <div
+        className={
+          currentChatFriendId === currentConvoFriendId
+            ? "conversationSelected"
+            : "conversation"
+        }
+      >
         <img
           src={
             user?.profilePicture
