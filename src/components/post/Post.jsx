@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import ModifyPost from "../modifyPost/ModifyPost";
@@ -7,7 +7,8 @@ import { getUserById } from "../../services/users";
 import { likeDislikePost, updatePostService } from "../../services/posts";
 import Highlighter from "react-highlight-words";
 import { TextField, IconButton } from "@material-ui/core";
-import SaveIcon from "@material-ui/icons/Save";
+import DoneAllIcon from "@material-ui/icons/DoneAll";
+import CancelIcon from "@material-ui/icons/Cancel";
 import Comment from "../comment/Comment";
 import "./post.css";
 
@@ -20,6 +21,13 @@ const Post = ({ post, search, deletePost, updatePost }) => {
   const [editDesc, setEditDesc] = useState(false);
   const [desc, setDesc] = useState(post?.desc);
   const [viewComments, setViewComments] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (editDesc) {
+      inputRef.current && inputRef.current.focus();
+    }
+  }, [editDesc]);
 
   useEffect(() => {
     // if the post.likes array already includes current id, the post is already liked
@@ -102,19 +110,30 @@ const Post = ({ post, search, deletePost, updatePost }) => {
               />
             ) : (
               <>
-                <form onSubmit={handleSave}>
+                <form onSubmit={handleSave} className="postDescriptionInput">
                   <TextField
+                    inputRef={inputRef}
+                    className="postDescriptionInputField"
                     label="Post Description"
                     autoFocus={true}
-                    variant="filled"
+                    variant="outlined"
                     color="primary"
                     value={desc}
                     onChange={(e) => setDesc(e.target.value)}
-                    style={{ width: 500 }}
-                  ></TextField>
-                  <IconButton type="submit">
-                    <SaveIcon style={{ fontSize: 30, marginLeft: 5 }} />
-                  </IconButton>
+                    style={{ width: 630 }}
+                  />
+                  <div className="postDescriptionIcons">
+                    <IconButton onClick={() => setEditDesc(false)}>
+                      <CancelIcon
+                        style={{ fontSize: 30, marginLeft: 5, color: "red" }}
+                      />
+                    </IconButton>
+                    <IconButton type="submit">
+                      <DoneAllIcon
+                        style={{ fontSize: 30, marginLeft: 5, color: "green" }}
+                      />
+                    </IconButton>
+                  </div>
                 </form>
               </>
             )}

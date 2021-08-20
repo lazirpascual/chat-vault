@@ -50,6 +50,18 @@
   margin-left: 20px;
 }
 
+.postDescriptionInput {
+  display: flex;
+  align-items: center;
+  margin-top: -25px;
+}
+
+.postDescriptionIcons {
+  display: flex;
+  margin-left: 10px;
+  opacity: 0.7;
+}
+
 .postImg {
   margin-top: 20px;
   width: 100%;

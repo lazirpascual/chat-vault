@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
-import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import PopupState, { bindPopover } from "material-ui-popup-state";
 import { MoreVert } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
@@ -11,6 +11,9 @@ import { removePost } from "../../services/posts";
 import "./modifyPost.css";
 
 const ModifyPost = ({ userId, post, deletePost, handleEditClick }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to remove this post?")) {
       try {
@@ -22,11 +25,20 @@ const ModifyPost = ({ userId, post, deletePost, handleEditClick }) => {
     }
   };
 
+  const handleEdit = () => {
+    handleEditClick();
+    setAnchorEl(null);
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <div>
-          <IconButton {...bindTrigger(popupState)}>
+          <IconButton onClick={handleClick}>
             <MoreVert className="updatePost" />
           </IconButton>
           <Popover
@@ -39,14 +51,14 @@ const ModifyPost = ({ userId, post, deletePost, handleEditClick }) => {
               vertical: "top",
               horizontal: "center",
             }}
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(null)}
+            open={open}
           >
             <div className="modifyPostContainer">
               {userId === post.userId && (
                 <>
-                  <Button
-                    className="modifyPostButtons"
-                    onClick={handleEditClick}
-                  >
+                  <Button className="modifyPostButtons" onClick={handleEdit}>
                     <EditOutlinedIcon />
                     <div className="editText">Edit</div>
                   </Button>
