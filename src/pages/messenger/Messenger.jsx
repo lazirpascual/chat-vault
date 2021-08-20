@@ -47,14 +47,14 @@ const Messenger = () => {
         createdAt: Date.now(),
       });
     });
-  }, [onlineUsers]);
+  }, []);
 
   useEffect(() => {
     // if socket message exists and if current chat is from sender, update message
     arrivalMessage &&
       currentChat?.members.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
-    // prev is used so messages does not have to be included in dependency list
+    // prev is used so messages do not have to be included in dependency list
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
