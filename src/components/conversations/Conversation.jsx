@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getUserById } from "../../services/users";
+import { Link } from "react-router-dom";
 import "./conversation.css";
 
-const Conversation = ({ conversation, currentUser }) => {
+const Conversation = ({ conversation, currentUser, linkToProfile }) => {
   const [user, setUser] = useState(null);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -20,18 +21,36 @@ const Conversation = ({ conversation, currentUser }) => {
     getUser();
   }, [currentUser, conversation]);
 
+  const ConversationBody = (params) => {
+    return (
+      <div className="conversation">
+        <img
+          src={
+            user?.profilePicture
+              ? `${PF}${user.profilePicture}`
+              : `${PF}person/noAvatar.png`
+          }
+          alt=""
+          className="conversationImg"
+        />
+        <span className="conversationName">{user?.username}</span>
+      </div>
+    );
+  };
+
   return (
-    <div className="conversation">
-      <img
-        src={
-          user?.profilePicture
-            ? `${PF}${user.profilePicture}`
-            : `${PF}person/noAvatar.png`
-        }
-        alt=""
-        className="conversationImg"
-      />
-      <span className="conversationName">{user?.username}</span>
+    <div>
+      {linkToProfile ? (
+        <Link
+          to={`/profile/${user?.username}`}
+          style={{ textDecoration: "none", color: "black" }}
+          key={user?.username}
+        >
+          {ConversationBody()}
+        </Link>
+      ) : (
+        ConversationBody()
+      )}
     </div>
   );
 };

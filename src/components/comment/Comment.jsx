@@ -80,6 +80,7 @@ const Comment = ({
             onChange={(e) => setUserComment(e.target.value)}
             className="commentInput"
             placeholder="Write a comment..."
+            required
           ></input>
         </form>
       </div>

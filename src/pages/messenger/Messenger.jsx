@@ -171,7 +171,11 @@ const Messenger = () => {
             {currentChat ? (
               <>
                 <div className="chatBoxHeading">
-                  <Conversation conversation={currentChat} currentUser={user} />
+                  <Conversation
+                    conversation={currentChat}
+                    currentUser={user}
+                    linkToProfile={true}
+                  />
                   <IconButton
                     className="chatBoxDeleteIcon"
                     onClick={handleDelete}
@@ -207,13 +211,20 @@ const Messenger = () => {
           </div>
         </div>
         <div className="chatOnline">
-          <div className="chatOnlineWrapper">
-            <ChatOnline
-              onlineUsers={onlineUsers}
-              currentId={user._id}
-              setCurrentChat={setCurrentChat}
-            />
-          </div>
+          {onlineUsers.length > 0 ? (
+            <div className="chatOnlineWrapper">
+              <ChatOnline
+                onlineUsers={onlineUsers}
+                currentId={user._id}
+                setCurrentChat={setCurrentChat}
+              />
+            </div>
+          ) : (
+            <div className="chatOnlineNoFriendsMessage">
+              <h3 className="rightbarTitle">Online Friends</h3>
+              <div>There are currently no friends online.</div>
+            </div>
+          )}
         </div>
       </div>
     </>

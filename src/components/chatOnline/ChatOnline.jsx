@@ -38,30 +38,32 @@ const ChatOnline = ({ onlineUsers, currentId, setCurrentChat }) => {
   };
 
   return (
-    <div className="chatOnline">
-      <h3 className="rightbarTitle">Online Friends</h3>
-      {onlineFriends.map((friend) => (
-        <div
-          key={friend._id}
-          className="chatOnlineFriend"
-          onClick={() => handleClick(friend)}
-        >
-          <div className="chatOnlineImgContainer">
-            <img
-              className="chatOnlineImg"
-              src={
-                friend?.profilePicture
-                  ? PF + friend.profilePicture
-                  : `${PF}person/noAvatar.png`
-              }
-              alt="Avatar"
-            />
-            <div className="chatOnlineBadge"></div>
+    <>
+      <div className="chatOnline">
+        <h3 className="rightbarTitle">Online Friends</h3>
+        {onlineFriends.map((friend) => (
+          <div
+            key={friend._id}
+            className="chatOnlineFriend"
+            onClick={() => handleClick(friend)}
+          >
+            <div className="chatOnlineImgContainer">
+              <img
+                className="chatOnlineImg"
+                src={
+                  friend?.profilePicture
+                    ? PF + friend.profilePicture
+                    : `${PF}person/noAvatar.png`
+                }
+                alt="Avatar"
+              />
+              <div className="chatOnlineBadge"></div>
+            </div>
+            <span className="chatOnlineName">{friend?.username}</span>
           </div>
-          <span className="chatOnlineName">{friend?.username}</span>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 };
 
