@@ -47,15 +47,7 @@ const Messenger = () => {
         createdAt: Date.now(),
       });
     });
-  }, []);
-
-  useEffect(() => {
-    // if socket message exists and if current chat is from sender, update message
-    arrivalMessage &&
-      currentChat?.members.includes(arrivalMessage.sender) &&
-      setMessages((prev) => [...prev, arrivalMessage]);
-    // prev is used so messages do not have to be included in dependency list
-  }, [arrivalMessage, currentChat]);
+  }, [onlineUsers]);
 
   useEffect(() => {
     socket.current.emit("addUser", user._id); // send user id to socket server
@@ -68,6 +60,14 @@ const Messenger = () => {
       );
     });
   }, [user]);
+
+  useEffect(() => {
+    // if socket message exists and if current chat is from sender, update message
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+    // prev is used so messages do not have to be included in dependency list
+  }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
     const getConversations = async () => {

@@ -19,7 +19,8 @@ This is a fullstack MERN application that models a social media website. Include
 ## ⚙️ Features
 
 - User registration/login authenticated through JSON Web Token
-- Realtime Chat with authenticated users implemented using Socket.IO
+- Realtime Chat implemented using Socket.IO
+  - Start or delete a chat with another user
 - Create, delete, update a post in the home page or profile page
 - Like/dislike and add/delete comments for each post
 - Follow or unfollow a user to view their content
@@ -41,16 +42,20 @@ This is a fullstack MERN application that models a social media website. Include
 
 ## 1. Home Page
 
-![preview](https://i.imgur.com/mmY5ii9.jpg)
+![preview](https://i.imgur.com/ys9L0sB.jpg)
 
 ## 2. Profile Page
 
-![preview](https://i.imgur.com/d14rGob.jpg)
+![preview](https://i.imgur.com/WZTInMO.jpg)
 
-## 3. Login Page
+## 3. Messenger Page
 
-![preview](https://i.imgur.com/OnKz4D9.jpg)
+![preview](https://i.imgur.com/fp3K4JG.jpg)
 
-## 4. Register Page
+## 4. Login Page
 
-![preview](https://i.imgur.com/0dPLz5B.jpg)
+![preview](https://i.imgur.com/eJvKEP5.jpg)
+
+## 5. Register Page
+
+![preview](https://i.imgur.com/M2rkxgg.jpg)
