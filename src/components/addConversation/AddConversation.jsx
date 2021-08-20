@@ -20,8 +20,9 @@ const AddConversation = ({
   setCurrentChat,
   conversations,
   setConversations,
+  anchorEl,
+  setAnchorEl,
 }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { user } = useContext(AuthContext);
   const [friends, setFriends] = useState([]);
@@ -37,10 +38,6 @@ const AddConversation = ({
     };
     user?._id && getFriends();
   }, [user]);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const startConversation = async (friendId) => {
     setAnchorEl(null);
@@ -70,7 +67,7 @@ const AddConversation = ({
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"
-        onClick={handleClick}
+        onClick={(e) => setAnchorEl(e.currentTarget)}
       >
         <PersonAddIcon className="addConversationIcon" />
       </IconButton>

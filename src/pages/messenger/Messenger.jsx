@@ -25,6 +25,7 @@ const Messenger = () => {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [messages, setMessages] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
   const socket = useRef();
   const scrollRef = useRef();
 
@@ -139,11 +140,14 @@ const Messenger = () => {
               conversations={conversations}
               setConversations={setConversations}
               setCurrentChat={setCurrentChat}
+              anchorEl={anchorEl}
+              setAnchorEl={setAnchorEl}
             />
           </div>
           <div className="chatMenuWrapper">
             <div>
               <TextField
+                onClick={(e) => setAnchorEl(e.currentTarget)}
                 placeholder="Search for friends"
                 className="chatMenuInput"
                 InputProps={{
