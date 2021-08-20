@@ -15,6 +15,7 @@ import { Search } from "@material-ui/icons";
 import { IconButton, TextField } from "@material-ui/core";
 import AddConversation from "../../components/addConversation/AddConversation";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import SendIcon from "@material-ui/icons/Send";
 import "./messenger.css";
 
 const Messenger = () => {
@@ -192,9 +193,9 @@ const Messenger = () => {
                     placeholder="Type your message here..."
                     onChange={(e) => setNewMessage(e.target.value)}
                   ></input>
-                  <button type="submit" className="chatSubmitButton">
-                    Send
-                  </button>
+                  <IconButton type="submit">
+                    <SendIcon className="chatSubmitButton" />
+                  </IconButton>
                 </form>
               </>
             ) : (
