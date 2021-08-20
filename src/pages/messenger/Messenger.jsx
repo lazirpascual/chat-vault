@@ -192,6 +192,7 @@ const Messenger = () => {
                     className="chatMessageInput"
                     placeholder="Type your message here..."
                     onChange={(e) => setNewMessage(e.target.value)}
+                    required
                   ></input>
                   <IconButton type="submit">
                     <SendIcon className="chatSubmitButton" />
