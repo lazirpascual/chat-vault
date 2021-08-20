@@ -32,8 +32,10 @@ const Messenger = () => {
 
   useEffect(() => {
     // set current chat to first conversation upon initial load
-    conversations.length > 0 && setCurrentChat(conversations[0]);
-  }, [conversations]);
+    conversations.length > 0 &&
+      !currentChat &&
+      setCurrentChat(conversations[0]);
+  }, [conversations, currentChat]);
 
   useEffect(() => {
     socket.current = io("https://chatvault.herokuapp.com");
@@ -132,6 +134,9 @@ const Messenger = () => {
       } catch (error) {
         console.log(error);
       }
+      conversations.length > 0
+        ? setCurrentChat(conversations[0])
+        : setCurrentChat(null);
     }
   };
 
