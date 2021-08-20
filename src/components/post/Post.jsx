@@ -120,7 +120,7 @@ const Post = ({ post, search, deletePost, updatePost }) => {
                     color="primary"
                     value={desc}
                     onChange={(e) => setDesc(e.target.value)}
-                    style={{ width: 530 }}
+                    fullWidth
                   />
                   <div className="postDescriptionIcons">
                     <IconButton onClick={() => setEditDesc(false)}>

@@ -103,6 +103,7 @@ const EditProfile = ({ user, setUser }) => {
         <span style={{ marginLeft: 10 }}>Edit Profile</span>
       </Button>
       <Dialog
+        scroll="body"
         open={open}
         onClose={() => setOpen(false)}
         fullScreen={fullScreen}
