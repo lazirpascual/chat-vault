@@ -69,7 +69,7 @@ const Rightbar = ({ user }) => {
             ))}
           </ul>
         ) : (
-          <div>There are currenntly no friends online.</div>
+          <div>There are currently no friends online.</div>
         )}
       </>
     );
