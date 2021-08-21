@@ -62,12 +62,15 @@ const Rightbar = ({ user }) => {
           <img src={`${PF}cloudcomputers.jpg`} alt="" className="rightbarAd" />
         </a>
         <h3 className="rightbarTitle">Online Friends</h3>
-
-        <ul className="rightbarFriendList">
-          {Users.map((u) => (
-            <Online key={u.id} user={u} />
-          ))}
-        </ul>
+        {currentUser.username === "Lazir Pascual" ? (
+          <ul className="rightbarFriendList">
+            {Users.map((u) => (
+              <Online key={u.id} user={u} />
+            ))}
+          </ul>
+        ) : (
+          <div>There are currenntly no friends online.</div>
+        )}
       </>
     );
   };
