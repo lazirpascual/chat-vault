@@ -1,10 +1,12 @@
 # Chat Vault
 
-<img src="https://i.imgur.com/SygPdPQ.gif" width="70%" height="500"/>
-
 ## Live Demo of [Chat Vault](https://chatvault.netlify.app/)
 
 This is a fullstack MERN application that models a social media website. Includes a Realtime Chat Feature built using Socket.IO library. Made using Javascript, React JS, Node JS, Express, MongoDB, and Material-UI. <br />
+
+<video width="90%" height="650" controls>
+  <source src="https://i.imgur.com/T77RoR0.mp4">
+</video>
 
 ## 🔗 Backend [Repo](https://github.com/lazirpascual/chat-vault-backend)
 
