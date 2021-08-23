@@ -51,7 +51,6 @@ const Topbar = ({ setSearchTerm }) => {
         <div className="topbarIcons">
           <div className="topbarIconItem">
             <Person />
-            <span className="topbarIconBadge">1</span>
           </div>
           <Link
             to="/messenger"
@@ -59,12 +58,11 @@ const Topbar = ({ setSearchTerm }) => {
           >
             <div className="topbarIconItem">
               <Chat />
-              <span className="topbarIconBadge">2</span>
+              <span className="topbarIconBadge">3</span>
             </div>
           </Link>
           <div className="topbarIconItem">
             <Notifications />
-            <span className="topbarIconBadge">1</span>
           </div>
         </div>
       </div>
