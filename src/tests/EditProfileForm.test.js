@@ -18,7 +18,7 @@ describe("When EditProfile Form is submitted,", () => {
   beforeEach(() => {
     component = render(<EditProfile user={user} setUser={submitProfile} />);
 
-    // get reference to all inputs in ReviewForm
+    // get reference to all inputs in EditProfileForm
     const bioInput = component.container.querySelector("#bio");
     const cityInput = component.container.querySelector("#city");
     const hometownInput = component.container.querySelector("#hometown");
@@ -38,12 +38,11 @@ describe("When EditProfile Form is submitted,", () => {
   });
 
   test("setUser() is called", () => {
-    // check if submitting the form calls the createReview method
+    // check if submitting the form calls the submitProfile method
     expect(submitProfile.mock.calls).toHaveLength(1);
   });
 
-  test("review contains correct content", () => {
-    // check if the review contains correct content
+  test("updated profile contains correct content", () => {
     expect(submitProfile.mock.calls[0][0].desc).toBe("Test Bio");
     expect(submitProfile.mock.calls[0][0].city).toBe("This is a test city");
     expect(submitProfile.mock.calls[0][0].from).toBe("This is a test hometown");

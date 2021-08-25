@@ -3,7 +3,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 import Friends from "../components/friends/Friends";
 
-// this is testing if the list of products in the cart is being generated properly
+// this is testing if the list of users in friend list is being generated properly
 test("Friends Component renders the correct content", () => {
   const user = {
     profilePicture: "person/2.jpeg",
@@ -12,6 +12,6 @@ test("Friends Component renders the correct content", () => {
 
   const component = render(<Friends user={user} />);
 
-  // check if the rendered Post contains the correct content
+  // check if the rendered friend list contains the following user
   expect(component.container).toHaveTextContent("Lazir Pascual");
 });

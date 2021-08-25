@@ -14,6 +14,7 @@ This is a fullstack MERN application that models a social media website. Include
 - **Front-End**: Javascript, React (Context API), Material-UI </br>
 - **Back-End**: NodeJS, Express, Socket.IO </br>
 - **Database**: MongoDB </br>
+- **Testing**: Jest, React-Testing-Library
 - **Deployment**: Heroku (backend), Netlify (frontend), MongoDB Atlas
 
 ## ⚙️ Features

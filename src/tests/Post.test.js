@@ -4,7 +4,7 @@ import { render, fireEvent } from "@testing-library/react";
 import Post from "../components/post/Post";
 import { BrowserRouter as Router } from "react-router-dom";
 
-// this is testing if the list of products in the cart is being generated properly
+// this is testing if the following post is being generated properly
 test("Post Component renders the correct content", () => {
   const post = {
     comments: [
@@ -37,7 +37,7 @@ test("Post Component renders the correct content", () => {
   const button = component.container.querySelector("#comments");
   fireEvent.click(button);
 
-  // check if the rendered Post contains the correct content
+  // check if the rendered post contains the correct content
   expect(component.container).toHaveTextContent("This is a test post");
   expect(component.container).toHaveTextContent("0 People liked this post");
   expect(component.container).toHaveTextContent("That's dope");

@@ -3,7 +3,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 import Message from "../components/message/Message";
 
-// this is testing if the list of products in the cart is being generated properly
+// this is testing if the messages are being generated properly
 test("Message Component renders the correct content", () => {
   const message = {
     profilePicture: "person/2.jpeg",
@@ -13,6 +13,6 @@ test("Message Component renders the correct content", () => {
 
   const component = render(<Message message={message} />);
 
-  // check if the rendered Post contains the correct content
+  // check if the rendered message contains the correct content
   expect(component.container).toHaveTextContent("This is a test message");
 });
