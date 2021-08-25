@@ -61,6 +61,14 @@
   padding-right: 10px;
 }
 
+.chatBoxTopNoMessage {
+  display: flex;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 500;
+  color: rgb(131, 131, 131);
+}
+
 .chatBoxBottom {
   margin-bottom: -90px;
   margin-top: 20px;

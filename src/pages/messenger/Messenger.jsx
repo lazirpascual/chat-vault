@@ -197,13 +197,19 @@ const Messenger = () => {
                     <DeleteForeverIcon />
                   </IconButton>
                 </div>
-                <div className="chatBoxTop">
-                  {messages?.map((m) => (
-                    <div key={m._id} ref={scrollRef}>
-                      <Message message={m} own={m.sender === user._id} />
-                    </div>
-                  ))}
-                </div>
+                {messages?.length > 0 ? (
+                  <div className="chatBoxTop">
+                    {messages?.map((m) => (
+                      <div key={m._id} ref={scrollRef}>
+                        <Message message={m} own={m.sender === user._id} />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="chatBoxTopNoMessage">
+                    Send Your First Message to Start the Conversation
+                  </div>
+                )}
                 <form className="chatBoxBottom" onSubmit={handleSubmit}>
                   <input
                     value={newMessage}
