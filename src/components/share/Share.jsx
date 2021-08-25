@@ -74,7 +74,7 @@ const Share = ({ addPost }) => {
         <div className="shareTop">
           <img
             src={
-              user.profilePicture
+              user?.profilePicture
                 ? `${PF}${user.profilePicture}`
                 : `${PF}person/noAvatar.png`
             }
@@ -83,10 +83,11 @@ const Share = ({ addPost }) => {
           />
           <input
             value={desc}
-            placeholder={`What's on your mind, ${user.username}?`}
+            placeholder={`What's on your mind, ${user?.username}?`}
             className="shareInput"
             onChange={(e) => setDesc(e.target.value)}
             required
+            id="postDesc"
           />
         </div>
         <hr className="shareHr" />
@@ -116,7 +117,7 @@ const Share = ({ addPost }) => {
               </div>
             ))}
           </div>
-          <button type="submit" className="shareButton">
+          <button type="submit" className="shareButton" id="share">
             Share
           </button>
         </form>

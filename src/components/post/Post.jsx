@@ -31,7 +31,7 @@ const Post = ({ post, search, deletePost, updatePost }) => {
 
   useEffect(() => {
     // if the post.likes array already includes current id, the post is already liked
-    setIsLiked(post.likes.includes(currentUser?._id));
+    setIsLiked(post.likes?.includes(currentUser?._id));
   }, [currentUser?._id, post.likes]);
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const Post = ({ post, search, deletePost, updatePost }) => {
           </div>
           <div className="postTopRight">
             <ModifyPost
-              userId={currentUser._id}
+              userId={currentUser?._id}
               post={post}
               deletePost={deletePost}
               handleEditClick={handleEditClick}
@@ -163,10 +163,11 @@ const Post = ({ post, search, deletePost, updatePost }) => {
           <div
             className="postBottomRight"
             onClick={() => setViewComments(!viewComments)}
+            id="comments"
           >
             <span className="postCommentText">
-              {post.comments.length}{" "}
-              {post.comments.length !== 1 ? `comments` : `comment`}
+              {post.comments?.length}{" "}
+              {post.comments?.length !== 1 ? `comments` : `comment`}
             </span>
           </div>
         </div>

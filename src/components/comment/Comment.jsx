@@ -67,7 +67,7 @@ const Comment = ({
       <div className="commentHeader">
         <img
           src={
-            currentUser.profilePicture
+            currentUser?.profilePicture
               ? PF + currentUser.profilePicture
               : PF + "person/noAvatar.png"
           }
@@ -110,7 +110,7 @@ const Comment = ({
               </Link>
               <p>{comment.desc}</p>
             </div>
-            {currentUser.username === comment.name && (
+            {currentUser?.username === comment.name && (
               <PopupState variant="popover" popupId="demo-popup-popover">
                 {(popupState) => (
                   <div>

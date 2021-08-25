@@ -23,11 +23,11 @@ const EditProfile = ({ user, setUser }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [open, setOpen] = useState(false);
-  const [bio, setBio] = useState(user.desc);
-  const [currentCity, setCurrentCity] = useState(user.city);
-  const [hometown, setHometown] = useState(user.from);
+  const [bio, setBio] = useState(user?.desc);
+  const [currentCity, setCurrentCity] = useState(user?.city);
+  const [hometown, setHometown] = useState(user?.from);
   const [relationshipStatus, setRelationshipStatus] = useState(
-    user.relationship
+    user?.relationship
   );
   const [openNotification, setOpenNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
@@ -193,6 +193,7 @@ const EditProfile = ({ user, setUser }) => {
             fullWidth
             multiline={true}
             rows={2}
+            id="bio"
           />
         </DialogContent>
         <DialogTitle id="responsive-dialog-title">
@@ -204,11 +205,13 @@ const EditProfile = ({ user, setUser }) => {
               label="Current City"
               value={currentCity}
               onChange={(e) => setCurrentCity(e.target.value)}
+              id="city"
             />
             <TextField
               label="Hometown"
               value={hometown}
               onChange={(e) => setHometown(e.target.value)}
+              id="hometown"
             />
             <FormControl>
               <InputLabel>Relationship Status</InputLabel>
@@ -229,7 +232,7 @@ const EditProfile = ({ user, setUser }) => {
           <Button autoFocus onClick={() => setOpen(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={updateProfile} color="primary">
+          <Button onClick={updateProfile} color="primary" id="submitButton">
             Submit
           </Button>
         </DialogActions>
