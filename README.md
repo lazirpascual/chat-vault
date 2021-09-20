@@ -19,6 +19,8 @@ This is a fullstack MERN application that models a social media website. Include
 
 ## ⚙️ Features
 
+<!--  -->
+
 - User registration/login authenticated through JSON Web Token
 - Realtime Chat implemented using Socket.IO
   - Start or delete a chat with another user
@@ -38,6 +40,25 @@ This is a fullstack MERN application that models a social media website. Include
   With both of the frontend and backend portion of my application in place, it was time to connect them together. I used Axios to consume the backend's REST APIs to populate the pages of my application with the appropriate data. Furthermore, I used Context API to globally manage the appliction's state, where I created an Auth Context, Auth Reducer, and Auth Actions, all of which are used to authenticate a user's account and give them access to different parts of the application.
 - **Creating a Realtime Chat Feature** <br />
   After building a majority of the application, I implented a feature that would allow authenticated users to communicate and talk to each other in realtime. To accomplish this, I built two additional backend models & routes; CONVERSATIONS and MESSAGES. The conversations route allows the application to fetch a conversation between two users and allows a user to start their own conversation. The messages route then displays all the messages of a conversation and allows the user to send messages to another user. Finally, I used Socket.IO to create a websocket server on the backend. This allowed the chat feature of my application to have realtime data flow, where the conversation between two users are instantaneously updated without having to make asynchronous requests.
+
+# Additional Features and Bugfixes
+
+- [x] Add token authentication
+- [x] Add friend list and online friends feature in homepage
+- [x] Create search page (friends and posts)
+- [x] Include ability to delete a user's posts
+- [x] Include ability to update a user's posts
+- [x] Create comment system for posts
+- [x] Add error handling for login and register pages
+- [x] Create edit profile functionality (pictures and personal info)
+- [x] Add ability to start a conversation in messenger
+- [x] Include feature to delete a conversation in messenger
+- [x] Add feature to search for a friend in messenger
+- [x] Add unit testing for components
+- [ ] Rewrite code in Typescript
+- [ ] Fix bug where user has to refresh page for realtime chat to work
+- [ ] Create friend request and notification system using Sockets
+- [ ] Add end-to-end testing using Cypress
 
 # Screenshots
 
